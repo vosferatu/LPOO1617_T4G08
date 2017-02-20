@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.awt.event.KeyEvent;
+
 public class Game {
 	
 	private boolean gameStatus = true;
@@ -22,6 +24,18 @@ public class Game {
 		Character d7 = new Door(4,8);
 		Character k1 = new Key(7,8);
 		
+		public void move(KeyEvent e){
+			int key = e.getKeyCode();
+			switch (key)
+			
+			case KeyEvent.VK_A:
+				checkMovement(h1, LEFT);
+			case KeyEvent.VK_D:
+				checkMovement(h1, RIGHT);
+			case KeyEvent.VK_W:
+				checkMovement(h1, UP);
+			case KeyEvent.VK_S
+			checkMovement(h1, DOWN);
 		
 		printmap();
 	}
