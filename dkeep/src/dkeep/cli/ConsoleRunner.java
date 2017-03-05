@@ -5,7 +5,7 @@ import dkeep.logic.Move;
 
 import java.util.Scanner;
 
-public class Runner {
+public class ConsoleRunner {
 	
 	private static Game game = null;
 	
@@ -75,8 +75,7 @@ public class Runner {
 	}
 	
 	/*private static void printDungeon() {
-		System.out.println(game.getLabyrinth().drawToString(
-				game.getLivingBeings(), game.getSword(), game.getEagle()));
+		System.out.println();
 	}*/
 
 	private static Move getHeroMove(Scanner scanner) {
