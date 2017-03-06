@@ -5,8 +5,8 @@ public class GameMap {
 	private int width;
 	private int height;
 
-	public GameMap(int level){
-		if(level == 1){
+	public GameMap(Game.State state){
+		if(state == Game.State.LEVEL1){
 			map = new char[][]	
 				   {{'X','X','X','X','X','X','X','X','X','X'},
 		  			{'X',' ',' ',' ','I',' ','X',' ','G','X'},
@@ -20,7 +20,7 @@ public class GameMap {
 		  			{'X','X','X','X','X','X','X','X','X','X'}};
 		}
 		
-		if(level == 2){
+		if(state == Game.State.LEVEL2){
 			map = new char[][]	
 				   {{'X','X','X','X','X','X','X','X','X'},
 		  			{'I',' ',' ',' ',' ',' ',' ',' ','X'},

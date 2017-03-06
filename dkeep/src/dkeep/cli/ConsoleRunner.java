@@ -3,6 +3,7 @@ package dkeep.cli;
 import dkeep.logic.Game;
 import dkeep.logic.Move;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleRunner {
@@ -14,7 +15,7 @@ public class ConsoleRunner {
 		mainMenu();
 
 		Scanner scanner = new Scanner(System.in);
-		int input = userInput(scanner, "Option?", 1, 2);
+		int input = userInput(scanner, "\n\t1. Play\n\t2. Exit\nOption?", 1, 2);
 		
 		boolean bad = true;
 		while(bad){
@@ -36,19 +37,25 @@ public class ConsoleRunner {
 	
 	private static void startDungeon(Scanner scanner) {
 		
-		boolean end = false;
+		boolean gameEnd = false;
+		
+		//ask for type of guard
 		
 		//printDungeon();
 
-		while (!end) {
+		while (!gameEnd) {
 			Move move = getHeroMove(scanner);
 			
-			end = game.updateGame(move);
+			gameEnd = game.updateGame(move);
 
 			//printDungeon();
+			
+			if(game.getState() == Game.State.TRANSITION){
+				//change map. ask for number of ogres
+			}
 		}
 
-		if (game.getHero().isDead()) {
+		if (game.getState() == Game.State.DEFEAT) {
 			System.out.println("\t************");
 			System.out.println("\t*GAME OVER!*");
 			System.out.println("\t************");
@@ -62,13 +69,21 @@ public class ConsoleRunner {
 
 	private static int userInput(Scanner scanner, String prompt,
 			int min, int max) {
-		int option;
+		int option = 0;
 	
 		do {
-			System.out.print(prompt);
-			System.out.print("> ");
 			
-			option = scanner.nextInt();
+		    try {
+				System.out.print(prompt);
+				System.out.print("> ");
+				
+				option = scanner.nextInt();
+		    } catch (InputMismatchException e) {
+		        System.out.print("Invalid input.\n");
+		    }
+			
+			scanner.nextLine();
+
 		} while (option > max || option < min);
 
 		return option;
@@ -91,20 +106,22 @@ public class ConsoleRunner {
 		input.toUpperCase();
 		Move move = null;
 		
-		switch (input) {
-			case "D":
+		char c = input.charAt(0);
+		
+		switch (c) {
+			case 'D':
 				move = Move.RIGHT;
 			break;
 			
-			case "A":
+			case 'A':
 				move = Move.LEFT;
 			break;
 			
-			case "W":
+			case 'W':
 				move = Move.UP;
 			break;
 			
-			case "S":
+			case 'S':
 				move = Move.DOWN;
 			break;
 
@@ -119,11 +136,7 @@ public class ConsoleRunner {
 		
 		System.out.println("\t******************");
 		System.out.println("\t* Dungeon Keeper *");
-		System.out.println("\t******************");
-		System.out.println();
-		System.out.println("\t1. Play");
-		System.out.println("\t2. Exit");
-		System.out.println();
+		System.out.println("\t******************\n");
 	}
 
 }
