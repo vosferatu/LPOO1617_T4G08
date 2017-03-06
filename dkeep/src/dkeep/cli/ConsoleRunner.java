@@ -37,6 +37,8 @@ public class ConsoleRunner {
 	
 	private static void startDungeon(Scanner scanner) {
 		
+		game = new Game();
+		
 		boolean gameEnd = false;
 		
 		//ask for type of guard
