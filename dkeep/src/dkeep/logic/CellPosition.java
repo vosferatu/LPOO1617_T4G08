@@ -19,7 +19,6 @@ public class CellPosition {
 		y = pos.getY();
 	}
 
-	
 	public int getX() {
 		return x;		
 	}
@@ -36,7 +35,7 @@ public class CellPosition {
 		this.y = y;
 	}
 	
-
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof CellPosition))
 			return false;
@@ -44,6 +43,20 @@ public class CellPosition {
 		CellPosition check = (CellPosition) obj;
 		
 		return (this.x == check.x && this.y == check.y);
+	}
+	
+	public boolean isAdjacent(Object obj){
+		if (!(obj instanceof CellPosition))
+			return false;
+
+		CellPosition check = (CellPosition) obj;
+		
+		if (this.x == check.x-1 && this.y == check.y ||
+				this.x == check.x+1 && this.y == check.y ||
+				this.x == check.x && this.y == check.y-1 ||
+				this.x == check.x && this.y == check.y+1)
+			return true;
+		else return false;
 	}
 	
 }
