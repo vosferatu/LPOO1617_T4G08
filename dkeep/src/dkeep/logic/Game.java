@@ -9,12 +9,8 @@ public class Game {
 	private Guard guard;
 	private Lever lever;
 	private ArrayList<Door> doors;
-	//private Ogre ogre;
+	private ArrayList<Ogre> ogres;
 	private State state = State.LEVEL1;
-	
-	public enum State {
-		LEVEL1, TRANSITION, LEVEL2, DEFEAT, WON
-	}
 	
 	public Game(){
 		map = new GameMap(this.state);
@@ -30,6 +26,15 @@ public class Game {
 		doors.add(new Door(new CellPosition(4,1),false));
 	}
 	
+
+
+	public State updateGame(Move move) {
+		
+		return State.DEFEAT;
+	}
+	
+	
+	
 	public Hero getHero() {
 		return hero;
 	}
@@ -44,11 +49,6 @@ public class Game {
 	
 	public void setGuard(Guard guard) {
 		this.guard = guard;
-	}
-
-	public boolean updateGame(Move move) {
-		
-		return false;
 	}
 
 	public State getState() {
@@ -73,6 +73,14 @@ public class Game {
 
 	public void setDoors(ArrayList<Door> doors) {
 		this.doors = doors;
+	}
+
+	public ArrayList<Ogre> getOgres() {
+		return ogres;
+	}
+
+	public void setOgres(ArrayList<Ogre> ogres) {
+		this.ogres = ogres;
 	}
 	
 }

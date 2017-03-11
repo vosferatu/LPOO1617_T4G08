@@ -2,6 +2,6 @@ package dkeep.logic;
 
 public enum Move {
 	
-	LEFT, RIGHT, UP, DOWN;
+	LEFT, RIGHT, UP, DOWN, STAY;
 
 }

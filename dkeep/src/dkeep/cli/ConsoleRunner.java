@@ -1,6 +1,7 @@
 package dkeep.cli;
 
 import dkeep.logic.Game;
+import dkeep.logic.Game.State;
 import dkeep.logic.Move;
 
 import java.util.InputMismatchException;
@@ -39,34 +40,57 @@ public class ConsoleRunner {
 		
 		game = new Game();
 		
-		boolean gameEnd = false;
+		State gameState = game.getState();
 		
-		//ask for type of guard
+		gamePreferences(scanner, game);
 		
 		//printDungeon();
 
-		while (!gameEnd) {
+		while (!(gameState == Game.State.DEFEAT  || gameState == Game.State.WON)) {
+			
 			Move move = getHeroMove(scanner);
 			
-			gameEnd = game.updateGame(move);
+			gameState = game.updateGame(move);
 
 			//printDungeon();
 			
-			if(game.getState() == Game.State.TRANSITION){
-				//change map. ask for number of ogres
-			}
 		}
 
-		if (game.getState() == Game.State.DEFEAT) {
+		if (gameState == Game.State.DEFEAT) {
 			System.out.println("\t************");
 			System.out.println("\t*GAME OVER!*");
 			System.out.println("\t************");
 		} else {
 			System.out.println("\t**********");
 			System.out.println("\t*YOU WON!*");
-			System.out.println("\t**********");
+			System.out.println("\t**********\n");
 		}
-		System.out.println();
+	}
+	
+	private static void gamePreferences(Scanner scanner, Game game){
+		
+		int input = userInput(scanner, "\n\t1. Rookie\n\t2. Drunken\n\t3. Suspicious\nOption?", 1, 3);
+		
+		boolean bad = true;
+		while(bad){
+			switch (input) {
+				case 1:
+					//game.setGuard(ROOKIE);
+				break;
+				case 2:
+					//game.setGuard(DRUNKEN);
+					bad = false;
+				break;
+				case 3:
+					//game.setGuard(SUSPICIOUS);
+				break;
+				default:
+				break;
+			}
+		}
+		
+		int ogreCount = userInput(scanner, "\n\tPlease enter the number of ogres.", 1, 5);
+		//game.setOgres(ogreCount);
 	}
 
 	private static int userInput(Scanner scanner, String prompt,

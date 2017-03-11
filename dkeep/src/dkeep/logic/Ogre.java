@@ -1,10 +1,9 @@
 package dkeep.logic;
 
-import dkeep.logic.Character.Type;
-
 public class Ogre extends Character {
 
 	private boolean atKey = false;
+	private int stun = 0;
 	
 	public Ogre(int x, int y) {
 		this.id = 'O';
@@ -30,6 +29,14 @@ public class Ogre extends Character {
 		 * 		this.setId('$')
 		 * }
 		 */
+	}
+
+	public int getStun() {
+		return stun;
+	}
+
+	public void setStun(int stun) {
+		this.stun = stun;
 	}
 
 }

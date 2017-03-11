@@ -7,11 +7,13 @@ public class Guard extends Character{
 	private boolean isAsleep = true;
 	private ArrayList<CellPosition> moves;
 	private int moveNum = 0;
+	private Personality personality = Personality.SIMPLE;
 	
 	public Guard() {
 		this.id = 'G';
 		this.position = new CellPosition(8,1);
 		this.type = Type.GUARD;
+		
 		moves.add(new CellPosition(7,1)); moves.add(new CellPosition(7,2));
 		moves.add(new CellPosition(7,3)); moves.add(new CellPosition(7,4));
 		moves.add(new CellPosition(7,5)); moves.add(new CellPosition(6,5));
@@ -77,6 +79,17 @@ public class Guard extends Character{
 	public void setMoveNum(int moveNum) {
 		this.moveNum = moveNum;
 	}
+	
+	public void nextMove(){
+		
+	}
 
+	public Personality getPersonality() {
+		return personality;
+	}
 
+	public void setPersonality(Personality personality) {
+		this.personality = personality;
+	}
+	
 }
