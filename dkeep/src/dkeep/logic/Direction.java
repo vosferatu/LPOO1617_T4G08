@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-public enum Move {
+public enum Direction {
 	
 	LEFT, RIGHT, UP, DOWN, STAY;
 

@@ -18,7 +18,7 @@ public class Hero extends Character {
 		this.type = Type.HERO;
 	}
 	
-	public void move(GameMap map, Move move){
+	public void move(GameMap map, Direction move){
 		
 		if (map.heroMovePossible(this, move)) {
 			switch (move) {

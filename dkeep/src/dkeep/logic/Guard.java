@@ -1,11 +1,9 @@
 package dkeep.logic;
 
-import java.util.ArrayList;
-
 public class Guard extends Character{
 	
 	private boolean isAsleep = true;
-	private ArrayList<CellPosition> moves;
+	private CellPosition[] moves;
 	private int moveNum = 0;
 	private Personality personality = Personality.SIMPLE;
 	
@@ -14,42 +12,15 @@ public class Guard extends Character{
 		this.position = new CellPosition(8,1);
 		this.type = Type.GUARD;
 		
-		moves.add(new CellPosition(7,1)); moves.add(new CellPosition(7,2));
-		moves.add(new CellPosition(7,3)); moves.add(new CellPosition(7,4));
-		moves.add(new CellPosition(7,5)); moves.add(new CellPosition(6,5));
-		moves.add(new CellPosition(5,5)); moves.add(new CellPosition(4,5));
-		moves.add(new CellPosition(3,5)); moves.add(new CellPosition(2,5));
-		moves.add(new CellPosition(1,5)); moves.add(new CellPosition(1,6));
-		moves.add(new CellPosition(2,6)); moves.add(new CellPosition(3,6));
-		moves.add(new CellPosition(4,6)); moves.add(new CellPosition(5,6));
-		moves.add(new CellPosition(6,6)); moves.add(new CellPosition(7,6));
-		moves.add(new CellPosition(8,6)); moves.add(new CellPosition(8,5));
-		moves.add(new CellPosition(8,4)); moves.add(new CellPosition(8,3));
-		moves.add(new CellPosition(8,2)); moves.add(new CellPosition(8,1));
-	}
-	
-	@Override
-	public void move(GameMap map, Move move){
-		switch (move) {
-			case RIGHT:
-				position.setX(position.getX() + 1);
-				break;
-		
-			case DOWN:
-				position.setY(position.getY() + 1);
-				break;
-		
-			case LEFT:
-				position.setX(position.getX() - 1);
-				break;
-		
-			case UP:
-				position.setY(position.getY() - 1);
-				break;
-		
-			default:
-				break;
-		}
+		moves = new CellPosition[] {new CellPosition(7,1), new CellPosition(7,2),
+		new CellPosition(7,3), (new CellPosition(7,4)), new CellPosition(7,5), 
+		new CellPosition(6,5), new CellPosition(5,5), new CellPosition(4,5),
+		new CellPosition(3,5), new CellPosition(2,5), new CellPosition(1,5),
+		new CellPosition(1,6), new CellPosition(2,6), new CellPosition(3,6),
+		new CellPosition(4,6), new CellPosition(5,6), new CellPosition(6,6),
+		new CellPosition(7,6), new CellPosition(8,6), new CellPosition(8,5),
+		new CellPosition(8,4), new CellPosition(8,3), new CellPosition(8,2),
+		new CellPosition(8,1)};
 	}
 
 	public boolean isAsleep() {
@@ -64,11 +35,11 @@ public class Guard extends Character{
 		this.isAsleep = true;
 	}
 
-	public ArrayList<CellPosition> getMoves() {
+	public CellPosition[] getMoves() {
 		return moves;
 	}
 
-	public void setMoves(ArrayList<CellPosition> moves) {
+	public void setMoves(CellPosition[] moves) {
 		this.moves = moves;
 	}
 
@@ -81,7 +52,22 @@ public class Guard extends Character{
 	}
 	
 	public void nextMove(){
+		if(this.personality == Personality.SIMPLE)
+			return;
 		
+		if(this.personality == Personality.ROOKIE){
+			if(moveNum == 23)
+				moveNum = 0;
+			this.setPosition(this.moves[moveNum]);
+			moveNum++;
+		}
+		
+		if(this.personality == Personality.DRUNKEN){
+			if(moveNum == 23)
+				moveNum = 0;
+			this.setPosition(this.moves[moveNum]);
+			moveNum++;
+		}
 	}
 
 	public Personality getPersonality() {
@@ -90,6 +76,16 @@ public class Guard extends Character{
 
 	public void setPersonality(Personality personality) {
 		this.personality = personality;
+	}
+
+	@Override
+	public String toString() {
+		String res = "" + id;
+		if(isAsleep()){
+			return res.toLowerCase();
+		}
+		
+		return res;
 	}
 	
 }

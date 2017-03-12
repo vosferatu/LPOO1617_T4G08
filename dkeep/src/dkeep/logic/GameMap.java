@@ -9,21 +9,21 @@ public class GameMap {
 		if(state == State.LEVEL1){
 			map = new char[][]	
 				   {{'X','X','X','X','X','X','X','X','X','X'},
-		  			{'X',' ',' ',' ','I',' ','X',' ','G','X'},
+		  			{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 		  			{'X','X','X',' ','X','X','X',' ',' ','X'},
 		  			{'X',' ','I',' ','I',' ','X',' ',' ','X'},
 		  			{'X','X','X',' ','X','X','X',' ',' ','X'},
 		  			{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 		  			{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 		  			{'X','X','X',' ','X','X','X','X',' ','X'},
-		  			{'X',' ','I',' ','I',' ','X','k',' ','X'},
+		  			{'X',' ','I',' ','I',' ','X',' ',' ','X'},
 		  			{'X','X','X','X','X','X','X','X','X','X'}};
 		}
 		
 		if(state == State.LEVEL2){
 			map = new char[][]	
 				   {{'X','X','X','X','X','X','X','X','X'},
-		  			{'I',' ',' ',' ','O',' ',' ','k','X'},
+		  			{'I',' ',' ',' ',' ',' ',' ','k','X'},
 		  			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
 		  			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
 		  			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -68,7 +68,7 @@ public class GameMap {
 		this.height = height;
 	}
 	
-	public boolean heroMovePossible(Hero hero, Move move) {
+	public boolean heroMovePossible(Hero hero, Direction move) {
 		int x = hero.getPosition().getX();
 		int y = hero.getPosition().getY();
 

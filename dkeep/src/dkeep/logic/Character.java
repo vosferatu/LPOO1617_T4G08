@@ -10,8 +10,6 @@ public abstract class Character {
 		HERO, OGRE, GUARD
 	}
 	
-	public abstract void move(GameMap map, Move move);
-	
 	public boolean isAt(CellPosition esta) {
 		return (this.equals(esta));
 	}

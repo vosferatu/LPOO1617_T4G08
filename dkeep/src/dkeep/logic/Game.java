@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Game {
 
-	public GameMap map;
-	private Hero hero;
-	private Guard guard;
-	private Lever lever;
-	private ArrayList<Door> doors;
-	private ArrayList<Ogre> ogres;
+	public GameMap map = null;
+	private Hero hero = null;
+	private Guard guard = null;
+	private Lever lever = null;
+	private ArrayList<Door> doors = new ArrayList<Door>();
+	private ArrayList<Ogre> ogres = new ArrayList<Ogre>();
 	private State state = State.LEVEL1;
 	
 	public Game(){
@@ -17,24 +17,67 @@ public class Game {
 		hero = new Hero();
 		guard = new Guard();
 		lever = new Lever(7,8);
-		doors.add(new Door(new CellPosition(0,5),true));
-		doors.add(new Door(new CellPosition(0,6),true));
-		doors.add(new Door(new CellPosition(2,3),false));
-		doors.add(new Door(new CellPosition(2,8),false));
-		doors.add(new Door(new CellPosition(4,3),false));
-		doors.add(new Door(new CellPosition(4,8),false));
-		doors.add(new Door(new CellPosition(4,1),false));
+		doors.add(new Door(new CellPosition(0,5)));
+		doors.add(new Door(new CellPosition(0,6)));
 	}
 	
 
-
-	public State updateGame(Move move) {
+	public State updateGame(Direction move) {
 		
-		return State.DEFEAT;
+		switch(state){
+			case LEVEL1:
+				if(dungeonLevel(move)){//passed dungeon level
+					
+				}
+				else{
+					if(this.hero.isDead())
+						state = State.DEFEAT;
+				}
+			break;
+			
+			case LEVEL2:
+				if(keepLevel(move)){
+					state = State.WON;
+				}
+				else{
+					if(this.hero.isDead())
+						state = State.DEFEAT;
+				}				
+			break;
+			
+			case WON:
+				state = State.WON;
+			break;
+			
+			case DEFEAT:
+				state = State.DEFEAT;
+			break;
+			
+			
+			default:
+			break;
+		}
+		
+		return state;
 	}
 	
+	private boolean dungeonLevel(Direction move) {//returns true if passed level, false otherwise
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	private boolean keepLevel(Direction move) {//returns true if passed level, false otherwise
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	
+	//---------------------------------------------------------------------------
+
 	
 	
+	//--------------------------------------------------------------------------
 	public Hero getHero() {
 		return hero;
 	}
@@ -47,8 +90,8 @@ public class Game {
 		return guard;
 	}
 	
-	public void setGuard(Guard guard) {
-		this.guard = guard;
+	public void setGuard(Personality type) {
+		this.guard.setPersonality(type);
 	}
 
 	public State getState() {
@@ -79,8 +122,12 @@ public class Game {
 		return ogres;
 	}
 
-	public void setOgres(ArrayList<Ogre> ogres) {
-		this.ogres = ogres;
+	public void setOgres(int ogreCount) {
+		int x = 0;
+		while(x != ogreCount){
+			this.ogres.add(new Ogre());
+			x++;
+		}
 	}
 	
 }

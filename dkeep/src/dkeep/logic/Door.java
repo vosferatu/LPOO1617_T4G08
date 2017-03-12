@@ -5,13 +5,11 @@ public class Door {
 	private CellPosition position;
 	private char id;
 	private boolean isOpen;
-	private boolean isExit;
 	
-	public Door(CellPosition position, boolean isExit) {
+	public Door(CellPosition position) {
 		this.position = position;
 		this.id = 'I';
 		this.isOpen = false;
-		this.isExit = isExit;
 	}
 	
 	public void openDoor(){
@@ -45,14 +43,6 @@ public class Door {
 
 	public void setOpen(boolean isOpen) {
 		this.isOpen = isOpen;
-	}
-
-	public boolean isExit() {
-		return isExit;
-	}
-
-	public void setExit(boolean isExit) {
-		this.isExit = isExit;
 	}
 
 }

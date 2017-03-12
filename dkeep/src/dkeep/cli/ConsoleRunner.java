@@ -1,8 +1,9 @@
 package dkeep.cli;
 
 import dkeep.logic.Game;
-import dkeep.logic.Game.State;
-import dkeep.logic.Move;
+import dkeep.logic.State;
+import dkeep.logic.Direction;
+import dkeep.logic.Personality;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -18,19 +19,16 @@ public class ConsoleRunner {
 		Scanner scanner = new Scanner(System.in);
 		int input = userInput(scanner, "\n\t1. Play\n\t2. Exit\nOption?", 1, 2);
 		
-		boolean bad = true;
-		while(bad){
-			switch (input) {
-				case 1:
-					startDungeon(scanner); bad = false;
-				break;
-				case 2:
-					System.out.println("\tLeaving Dungeon Keeper. Goodbye...");
-					bad = false;
-				break;
-				default:
-				break;
-			}
+
+		switch (input) {
+		case 1:
+			startDungeon(scanner);
+			break;
+		case 2:
+			System.out.println("\tLeaving Dungeon Keeper. Goodbye...");
+			break;
+		default:
+			break;
 		}
 		
 		scanner.close();
@@ -46,9 +44,9 @@ public class ConsoleRunner {
 		
 		//printDungeon();
 
-		while (!(gameState == Game.State.DEFEAT  || gameState == Game.State.WON)) {
+		while (!(gameState == State.DEFEAT  || gameState == State.WON)) {
 			
-			Move move = getHeroMove(scanner);
+			Direction move = getHeroMove(scanner);
 			
 			gameState = game.updateGame(move);
 
@@ -56,7 +54,7 @@ public class ConsoleRunner {
 			
 		}
 
-		if (gameState == Game.State.DEFEAT) {
+		if (gameState == State.DEFEAT) {
 			System.out.println("\t************");
 			System.out.println("\t*GAME OVER!*");
 			System.out.println("\t************");
@@ -69,28 +67,25 @@ public class ConsoleRunner {
 	
 	private static void gamePreferences(Scanner scanner, Game game){
 		
-		int input = userInput(scanner, "\n\t1. Rookie\n\t2. Drunken\n\t3. Suspicious\nOption?", 1, 3);
+		int input = userInput(scanner, "\nGuard Personality:\n 1. Rookie\n 2. Drunken\n 3. Suspicious\n 4. Simple\nOption?", 1, 4);
 		
-		boolean bad = true;
-		while(bad){
-			switch (input) {
-				case 1:
-					//game.setGuard(ROOKIE);
-				break;
-				case 2:
-					//game.setGuard(DRUNKEN);
-					bad = false;
-				break;
-				case 3:
-					//game.setGuard(SUSPICIOUS);
-				break;
-				default:
-				break;
-			}
+
+		switch (input) {
+		case 1:
+			game.setGuard(Personality.ROOKIE);
+			break;
+		case 2:
+			game.setGuard(Personality.DRUNKEN);
+			break;
+		case 3:
+			game.setGuard(Personality.SUSPICIOUS);
+			break;
+		default:
+			break;
 		}
 		
-		int ogreCount = userInput(scanner, "\n\tPlease enter the number of ogres.", 1, 5);
-		//game.setOgres(ogreCount);
+		int ogreCount = userInput(scanner, "\nPlease enter the number of ogres", 1, 5);
+		game.setOgres(ogreCount);
 	}
 
 	private static int userInput(Scanner scanner, String prompt,
@@ -119,7 +114,7 @@ public class ConsoleRunner {
 		System.out.println();
 	}*/
 
-	private static Move getHeroMove(Scanner scanner) {
+	private static Direction getHeroMove(Scanner scanner) {
 		String input;
 
 		do {
@@ -130,25 +125,25 @@ public class ConsoleRunner {
 				&& !input.equals("S") && !input.equals("D"));
 
 		input.toUpperCase();
-		Move move = null;
+		Direction move = null;
 		
 		char c = input.charAt(0);
 		
 		switch (c) {
 			case 'D':
-				move = Move.RIGHT;
+				move = Direction.RIGHT;
 			break;
 			
 			case 'A':
-				move = Move.LEFT;
+				move = Direction.LEFT;
 			break;
 			
 			case 'W':
-				move = Move.UP;
+				move = Direction.UP;
 			break;
 			
 			case 'S':
-				move = Move.DOWN;
+				move = Direction.DOWN;
 			break;
 
 			default:

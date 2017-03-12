@@ -11,9 +11,17 @@ public class Ogre extends Character {
 		this.type = Type.OGRE;
 	}
 
-	@Override
-	public void move(GameMap map, Move move) {
-		// TODO Auto-generated method stub
+	public Ogre() {
+		this.id = 'O';
+		this.position = new CellPosition(4,4);
+		this.type = Type.OGRE;
+	}
+
+	public void move(GameMap map) {
+		if(stun > 0){
+			stun--;
+			return;
+		}
 		
 	}
 
@@ -39,4 +47,15 @@ public class Ogre extends Character {
 		this.stun = stun;
 	}
 
+	@Override
+	public String toString() {
+		String res = "";
+		if(getStun() > 0){
+			res+= "8";
+		}
+		else res += id;
+		
+		return res;
+	}
+	
 }
