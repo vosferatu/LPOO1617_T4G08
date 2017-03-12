@@ -68,6 +68,14 @@ public class Guard extends Character{
 			this.setPosition(this.moves[moveNum]);
 			moveNum++;
 		}
+		
+		if(this.personality == Personality.SUSPICIOUS){
+			if(moveNum == 23)
+				moveNum = 0;
+			this.setPosition(this.moves[moveNum]);
+			moveNum++;
+		}
+		
 	}
 
 	public Personality getPersonality() {

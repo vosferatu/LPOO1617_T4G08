@@ -51,22 +51,6 @@ public class GameMap {
 
 		return mapa;
 	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
 	
 	public boolean heroMovePossible(Hero hero, Direction move) {
 		int x = hero.getPosition().getX();
@@ -102,4 +86,31 @@ public class GameMap {
 		else
 			return false;
 	}
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+
+	public char[][] getMap() {
+		return map;
+	}
+
+
+	public void setMap(char[][] map) {
+		this.map = map;
+	}
+	
 }

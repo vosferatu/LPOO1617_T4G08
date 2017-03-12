@@ -17,7 +17,7 @@ public class ConsoleRunner {
 		mainMenu();
 
 		Scanner scanner = new Scanner(System.in);
-		int input = userInput(scanner, "\n\t1. Play\n\t2. Exit\nOption?", 1, 2);
+		int input = userInput(scanner, "\t1. Play\n\t2. Exit\nOption?", 1, 2);
 		
 
 		switch (input) {
@@ -42,7 +42,7 @@ public class ConsoleRunner {
 		
 		gamePreferences(scanner, game);
 		
-		//printDungeon();
+		printDungeon(game);
 
 		while (!(gameState == State.DEFEAT  || gameState == State.WON)) {
 			
@@ -50,7 +50,7 @@ public class ConsoleRunner {
 			
 			gameState = game.updateGame(move);
 
-			//printDungeon();
+			printDungeon(game);
 			
 		}
 
@@ -110,9 +110,9 @@ public class ConsoleRunner {
 		return option;
 	}
 	
-	/*private static void printDungeon() {
-		System.out.println();
-	}*/
+	private static void printDungeon(Game game) {
+		System.out.println(game);
+	}
 
 	private static Direction getHeroMove(Scanner scanner) {
 		String input;

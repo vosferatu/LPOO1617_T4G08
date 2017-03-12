@@ -62,26 +62,45 @@ public class Game {
 	}
 	
 	private boolean dungeonLevel(Direction move) {//returns true if passed level, false otherwise
-		// TODO Auto-generated method stub
-		return false;
+		boolean done = false;
+		
+		
+		
+		return done;
 	}
 	
 	private boolean keepLevel(Direction move) {//returns true if passed level, false otherwise
-		// TODO Auto-generated method stub
-		return false;
+		boolean done = false;
+		
+		return !done;
 	}
 
 
 	
-	//---------------------------------------------------------------------------
+	//-------------------------PRINT--------------------------------------------
+
+	@Override
+	public String toString() {
+		String res = "\n";
+		
+		for (int i = 0; i < map.getMap().length; i++) {
+			for(int j = 0; j < map.getMap()[i].length; j++){
+				res += map.getMap()[i][j] + " ";
+			}
+			res += "\n";
+		}
+		return res;
+	}
 
 	
-	
 	//--------------------------------------------------------------------------
+	
+	
+	
 	public Hero getHero() {
 		return hero;
 	}
-	
+
 	public void setHero(Hero hero) {
 		this.hero = hero;
 	}
