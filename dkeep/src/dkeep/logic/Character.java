@@ -10,6 +10,10 @@ public abstract class Character {
 		HERO, OGRE, GUARD
 	}
 	
+	public boolean isAdjacent(Character other){
+		return this.position.isAdjacent(other.position);
+	}
+	
 	public boolean isAt(CellPosition esta) {
 		return (this.equals(esta));
 	}

@@ -27,12 +27,24 @@ public class Game {
 		switch(state){
 			case LEVEL1:
 				if(dungeonLevel(move)){//passed dungeon level
-					
+					this.state = State.FROM1TO2;
 				}
 				else{
 					if(this.hero.isDead())
 						state = State.DEFEAT;
 				}
+			break;
+			
+			case FROM1TO2:
+				System.out.println(this);	//prints hero getting on stairs
+				
+				hero = new Hero(1,7);
+				guard = null;
+				lever = new Lever(7,1);
+				doors.clear(); doors.add(new Door(new CellPosition(0,1)));
+				map = new GameMap(this.state);
+				
+				state = State.LEVEL2;
 			break;
 			
 			case LEVEL2:
@@ -64,7 +76,37 @@ public class Game {
 	private boolean dungeonLevel(Direction move) {//returns true if passed level, false otherwise
 		boolean done = false;
 		
+		//move hero
+		if(!map.heroMovePossible(hero, move))//prevent guard from moving
+			return false;						//if hero moves to wall/closed door
 		
+		hero.move(map, move);
+		
+		//move guard
+		guard.nextMove();
+		
+		//checks if hero is at lever position if he hasn't the key already
+		if(!hero.hasKey()){
+			if(hero.turnLever(lever)){
+				map.openDoors();
+				for (Door door : doors) {
+					door.openDoor();
+				}
+			}
+		}
+		
+		//checks if hero is going to die
+		if(hero.isAdjacent(guard)){
+			hero.setDead(true);
+		}
+		
+		//checks if hero is at a stair
+		for (Door door : doors) {
+			if(hero.getPosition().equals(door.getPosition()) && door.isOpen()){
+				done = true;
+				break;
+			}
+		}
 		
 		return done;
 	}
@@ -72,7 +114,7 @@ public class Game {
 	private boolean keepLevel(Direction move) {//returns true if passed level, false otherwise
 		boolean done = false;
 		
-		return !done;
+		return true;
 	}
 
 
@@ -85,7 +127,24 @@ public class Game {
 		
 		for (int i = 0; i < map.getMap().length; i++) {
 			for(int j = 0; j < map.getMap()[i].length; j++){
-				res += map.getMap()[i][j] + " ";
+				boolean noChar = true;
+				
+				if(hero.isAt(j, i) || (hero.isAt(j, i) && lever.getPosition().isAt(j, i))){
+					res += hero; noChar = false;
+				}
+				
+				if(lever.getPosition().isAt(j, i) && !hero.isAt(j, i)){
+					res += lever; noChar = false;
+				}
+				
+				if(guard.isAt(j, i)){
+					res += guard; noChar = false;
+				}
+				
+				if(noChar)
+					res += map.getMap()[i][j];
+				
+				res += " ";
 			}
 			res += "\n";
 		}

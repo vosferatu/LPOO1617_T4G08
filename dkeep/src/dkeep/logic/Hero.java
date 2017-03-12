@@ -67,5 +67,20 @@ public class Hero extends Character {
 	public void setDead(boolean dead) {
 		this.dead = dead;
 	}
+
+	public boolean turnLever(Lever lever) {
+		if(this.position.equals(lever.getPosition())){
+			this.hasKey = true;
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "" + id;
+	}
+	
+	
 	
 }

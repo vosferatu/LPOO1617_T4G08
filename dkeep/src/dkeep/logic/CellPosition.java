@@ -45,16 +45,20 @@ public class CellPosition {
 		return (this.x == check.x && this.y == check.y);
 	}
 	
+	public boolean isAt(int x, int y){
+		return (this.x == x) && (this.y == y);
+	}
+	
 	public boolean isAdjacent(Object obj){
 		if (!(obj instanceof CellPosition))
 			return false;
 
 		CellPosition check = (CellPosition) obj;
 		
-		if (this.x == check.x-1 && this.y == check.y ||
-				this.x == check.x+1 && this.y == check.y ||
-				this.x == check.x && this.y == check.y-1 ||
-				this.x == check.x && this.y == check.y+1)
+		if ((this.x == check.x-1 && this.y == check.y) ||
+				(this.x == check.x+1 && this.y == check.y) ||
+				(this.x == check.x && this.y == check.y-1) ||
+				(this.x == check.x && this.y == check.y+1) )
 			return true;
 		else return false;
 	}

@@ -1,11 +1,12 @@
 package dkeep.logic;
 
 public class GameMap {
-	public char [][] map;
+	public char [][] map = null;
 	private int width;
 	private int height;
 
 	public GameMap(State state){
+		
 		if(state == State.LEVEL1){
 			map = new char[][]	
 				   {{'X','X','X','X','X','X','X','X','X','X'},
@@ -118,6 +119,15 @@ public class GameMap {
 
 	public void setMap(char[][] map) {
 		this.map = map;
+	}
+	
+	public void openDoors(){
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++){
+				if(map[i][j] == 'I')
+					map[i][j] = 'S';
+			}
+		}
 	}
 	
 }

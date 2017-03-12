@@ -39,4 +39,11 @@ public class Lever {
 		this.wasHit = hit;
 	}
 
+	@Override
+	public String toString() {
+		return "" + id;
+	}
+	
+	
+
 }

@@ -124,8 +124,8 @@ public class ConsoleRunner {
 				&& !input.equals("d") && !input.equals("W") && !input.equals("A") 
 				&& !input.equals("S") && !input.equals("D"));
 
-		input.toUpperCase();
-		Direction move = null;
+		input = input.toUpperCase();
+		Direction move = Direction.STAY;
 		
 		char c = input.charAt(0);
 		
@@ -147,6 +147,7 @@ public class ConsoleRunner {
 			break;
 
 			default:
+				move = Direction.STAY;
 			break;
 		}
 

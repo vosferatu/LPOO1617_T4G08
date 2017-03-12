@@ -2,7 +2,7 @@ package dkeep.logic;
 
 public class Guard extends Character{
 	
-	private boolean isAsleep = true;
+	private boolean isAsleep = false;
 	private CellPosition[] moves;
 	private int moveNum = 0;
 	private Personality personality = Personality.SIMPLE;
@@ -56,21 +56,21 @@ public class Guard extends Character{
 			return;
 		
 		if(this.personality == Personality.ROOKIE){
-			if(moveNum == 23)
+			if(moveNum == 24)
 				moveNum = 0;
 			this.setPosition(this.moves[moveNum]);
 			moveNum++;
 		}
 		
 		if(this.personality == Personality.DRUNKEN){
-			if(moveNum == 23)
+			if(moveNum == 24)
 				moveNum = 0;
 			this.setPosition(this.moves[moveNum]);
 			moveNum++;
 		}
 		
 		if(this.personality == Personality.SUSPICIOUS){
-			if(moveNum == 23)
+			if(moveNum == 24)
 				moveNum = 0;
 			this.setPosition(this.moves[moveNum]);
 			moveNum++;
