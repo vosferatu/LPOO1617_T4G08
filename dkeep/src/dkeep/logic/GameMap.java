@@ -38,6 +38,13 @@ public class GameMap {
 	}
 	
 
+	public GameMap(char[][] map2) {
+		this.map = map2;
+		this.height = map2.length;
+		this.width = map2[0].length;
+	}
+
+
 	@Override
 	public String toString() {
 		String mapa = "\n";
