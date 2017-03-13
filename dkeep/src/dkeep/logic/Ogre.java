@@ -4,11 +4,13 @@ public class Ogre extends Character {
 
 	private boolean atKey = false;
 	private int stun = 0;
+	private Club club = null;
 	
 	public Ogre(int x, int y) {
 		this.id = 'O';
 		this.position = new CellPosition(x,y);
 		this.type = Type.OGRE;
+		this.club = new Club(this);
 	}
 
 	public Ogre() {
@@ -56,6 +58,14 @@ public class Ogre extends Character {
 		else res += id;
 		
 		return res;
+	}
+
+	public Club getClub() {
+		return club;
+	}
+
+	public void setClub(Club club) {
+		this.club = club;
 	}
 	
 }
