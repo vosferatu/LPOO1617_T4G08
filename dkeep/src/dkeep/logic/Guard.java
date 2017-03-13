@@ -61,7 +61,7 @@ public class Guard extends Character{
 				if(asleep == 0){
 				    Random rand = new Random();
 				    
-				    int randomN = rand.nextInt(1);
+				    int randomN = rand.nextInt(2);
 				    
 				    if(randomN == 0){
 				    	if(direction == Direction.RIGHT)
