@@ -2,10 +2,11 @@ package dkeep.logic;
 
 public class Guard extends Character{
 	
-	private boolean isAsleep = false;
+	private int asleep = 0;
 	private CellPosition[] moves;
 	private int moveNum = 0;
 	private Personality personality = Personality.SIMPLE;
+	private Direction direction = Direction.RIGHT;//direction in vector of positions
 	
 	public Guard() {
 		this.id = 'G';
@@ -21,18 +22,6 @@ public class Guard extends Character{
 		new CellPosition(7,6), new CellPosition(8,6), new CellPosition(8,5),
 		new CellPosition(8,4), new CellPosition(8,3), new CellPosition(8,2),
 		new CellPosition(8,1)};
-	}
-
-	public boolean isAsleep() {
-		return isAsleep;
-	}
-
-	public void wakeUp() {
-		this.isAsleep = false;
-	}
-	
-	public void sleep() {
-		this.isAsleep = true;
 	}
 
 	public CellPosition[] getMoves() {
@@ -63,10 +52,27 @@ public class Guard extends Character{
 		}
 		
 		if(this.personality == Personality.DRUNKEN){
-			if(moveNum == 24)
-				moveNum = 0;
+			if(asleep > 0){
+				asleep--;
+				return;
+			}
+			else{
+				
+			}
+			
+
+			
 			this.setPosition(this.moves[moveNum]);
-			moveNum++;
+			if(direction == Direction.LEFT){
+				
+			} else {
+				moveNum++;
+			}
+		
+			if(moveNum > 23 || moveNum < 0)
+				moveNum = 0;
+		
+		
 		}
 		
 		if(this.personality == Personality.SUSPICIOUS){
@@ -94,6 +100,30 @@ public class Guard extends Character{
 		}
 		
 		return res;
+	}
+
+	public int getAsleep() {
+		return asleep;
+	}
+	
+	public boolean isAsleep(){
+		return (this.asleep > 0);
+	}
+
+	public void setAsleep(int asleep) {
+		this.asleep = asleep;
+	}
+	
+	public void wakeUp(){
+		this.asleep = 0;
+	}
+
+	public Direction getDirection() {
+		return direction;
+	}
+
+	public void setDirection(Direction direction) {
+		this.direction = direction;
 	}
 	
 }
