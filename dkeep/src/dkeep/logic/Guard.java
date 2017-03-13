@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.Random;
+
 public class Guard extends Character{
 	
 	private int asleep = 0;
@@ -44,6 +46,7 @@ public class Guard extends Character{
 		if(this.personality == Personality.SIMPLE)
 			return;
 		
+		
 		if(this.personality == Personality.ROOKIE){
 			if(moveNum == 24)
 				moveNum = 0;
@@ -51,9 +54,21 @@ public class Guard extends Character{
 			moveNum++;
 		}
 		
+		
 		if(this.personality == Personality.DRUNKEN){
 			if(asleep > 0){
 				asleep--;
+				if(asleep == 0){
+				    Random rand = new Random();
+				    
+				    int randomN = rand.nextInt(1);
+				    
+				    if(randomN == 0){
+				    	if(direction == Direction.RIGHT)
+				    		direction = Direction.LEFT;
+				    	else direction = Direction.RIGHT;
+				    }
+				}
 				return;
 			}
 			else{
@@ -69,11 +84,13 @@ public class Guard extends Character{
 				moveNum++;
 			}
 		
-			if(moveNum > 23 || moveNum < 0)
+			if(moveNum < 0)
+				moveNum = 23;
+		
+			if(moveNum > 23)
 				moveNum = 0;
+		} 
 		
-		
-		}
 		
 		if(this.personality == Personality.SUSPICIOUS){
 			if(moveNum == 24)
