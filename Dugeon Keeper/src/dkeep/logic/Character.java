@@ -1,33 +1,48 @@
 package dkeep.logic;
 
-class Character {
-	private int x;
-	private int y;
-	private char id;
+public abstract class Character {
+	
+	protected CellPosition position = new CellPosition();
+	protected char id;
+	protected Type type;
+	
+	public enum Type {
+		HERO, OGRE, GUARD
+	}
+	
+	public boolean isAdjacent(Character other){
+		return this.position.isAdjacent(other.position);
+	}
+	
+	public boolean isAt(CellPosition esta) {
+		return (this.equals(esta));
+	}
+	
+	public boolean isAt(int x, int y) {
+		return (x == getPosition().getX()) && (y == getPosition().getY());
+	}
 
-	public Character() {
-		super();
+	public CellPosition getPosition() {
+		return position;
+	}
+
+	public void setPosition(CellPosition position) {
+		this.position = position;
 	}
 	
-	public int getx() {
-		return x;		
+	public char getId(){
+		return id;
+	}
+
+	public void setId(char id){
+		this.id = id;
 	}
 	
-	public int gety(){
-		return y;
+	public Type getType() {
+		return type;
 	}
-	
-	public void setx(int x)
-	{
-		this.x = x;
-	}
-	
-	public void sety(int y)
-	{
-		this.y = y;
-	}
-	
-	public void setid(char h){
-		this.id = h;
+
+	public void setType(Type type) {
+		this.type = type;
 	}
 }

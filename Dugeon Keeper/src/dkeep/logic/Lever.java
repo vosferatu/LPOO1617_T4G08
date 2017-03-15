@@ -1,20 +1,14 @@
 package dkeep.logic;
 
-public class Door {
-
+public class Lever {
+	
 	private CellPosition position;
 	private char id;
-	private boolean isOpen;
+	private boolean wasHit = false;
 	
-	public Door(CellPosition position) {
-		this.position = position;
-		this.id = 'I';
-		this.isOpen = false;
-	}
-	
-	public void openDoor(){
-		this.id = 'S';
-		this.isOpen = true;
+	public Lever(int x, int y) {
+		this.setPosition(new CellPosition(x,y));
+		this.setId('k');
 	}
 
 	public CellPosition getPosition() {
@@ -37,12 +31,19 @@ public class Door {
 		this.id = id;
 	}
 
-	public boolean isOpen() {
-		return isOpen;
+	public boolean wasHit() {
+		return wasHit;
 	}
 
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
+	public void setHit(boolean hit) {
+		this.wasHit = hit;
 	}
+
+	@Override
+	public String toString() {
+		return "" + id;
+	}
+	
+	
 
 }
