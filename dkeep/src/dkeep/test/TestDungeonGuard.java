@@ -8,7 +8,6 @@ import dkeep.logic.Game;
 import dkeep.logic.GameMap;
 
 
-
 public class TestDungeonGuard {
 
 	char [][] map ={{'X','X','X','X','X'},
