@@ -85,7 +85,7 @@ public class ConsoleRunner {
 		}
 		
 		int ogreCount = userInput(scanner, "\nPlease enter the number of ogres", 1, 5);
-		game.setOgres(ogreCount);
+		game.setOgreCount(ogreCount);
 	}
 
 	private static int userInput(Scanner scanner, String prompt,

@@ -10,6 +10,7 @@ public class Game {
 	private Lever lever = null;
 	private ArrayList<Door> doors = new ArrayList<Door>();
 	private ArrayList<Ogre> ogres = new ArrayList<Ogre>();
+	private int ogreCount = 0;
 	private State state = State.LEVEL1;
 
 	public Game() {
@@ -42,6 +43,7 @@ public class Game {
 			doors.clear();
 			doors.add(new Door(new CellPosition(0, 1)));
 			map = new GameMap(this.state);
+			this.setOgres(ogreCount);
 
 			state = State.LEVEL2;
 			break;
@@ -95,7 +97,7 @@ public class Game {
 		}
 
 		// checks if hero is going to die
-		if (hero.isAdjacent(guard)) {
+		if (hero.isAdjacent(guard) && (!guard.isAsleep())) {
 			hero.setDead(true);
 		}
 
@@ -120,7 +122,7 @@ public class Game {
 
 		hero.move(map, move);
 
-		return true;
+		return done;
 	}
 
 	// -------------------------PRINT--------------------------------------------
@@ -231,6 +233,14 @@ public class Game {
 			this.ogres.add(new Ogre());
 			x++;
 		}
+	}
+
+	public int getOgreCount() {
+		return ogreCount;
+	}
+
+	public void setOgreCount(int ogreCount) {
+		this.ogreCount = ogreCount;
 	}
 
 }
