@@ -1,5 +1,5 @@
 package dkeep.logic;
 
 public enum Personality {
-	DRUNKEN, ROOKIE, SUSPICIOUS, SIMPLE
+	SIMPLE, ROOKIE, DRUNKEN, SUSPICIOUS
 }
