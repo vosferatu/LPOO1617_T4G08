@@ -17,6 +17,7 @@ public class Ogre extends Character {
 		this.id = 'O';
 		this.position = new CellPosition(4,4);
 		this.type = Type.OGRE;
+		this.club = new Club(this);
 	}
 
 	public void move(GameMap map) {
