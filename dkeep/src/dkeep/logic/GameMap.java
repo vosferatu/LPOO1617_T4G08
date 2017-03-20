@@ -5,9 +5,9 @@ public class GameMap {
 	private int width;
 	private int height;
 
-	public GameMap(State state){
+	public GameMap(Level level){
 		
-		if(state == State.LEVEL1){
+		if(level instanceof DungeonLevel){
 			map = new char[][]	
 				   {{'X','X','X','X','X','X','X','X','X','X'},
 		  			{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
@@ -21,7 +21,7 @@ public class GameMap {
 		  			{'X','X','X','X','X','X','X','X','X','X'}};
 		}
 		
-		if(state == State.LEVEL2){
+		if(level instanceof KeepLevel){
 			map = new char[][]	
 				   {{'X','X','X','X','X','X','X','X','X'},
 		  			{'I',' ',' ',' ',' ',' ',' ',' ','X'},

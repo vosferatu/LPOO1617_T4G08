@@ -3,57 +3,39 @@ package dkeep.logic;
 import java.util.ArrayList;
 
 public class Game {
-
-	public GameMap map = null;
-	private Hero hero = null;
-	private Guard guard = null;
-	private Lever lever = null;
-	private ArrayList<Door> doors = new ArrayList<Door>();
-	private ArrayList<Ogre> ogres = new ArrayList<Ogre>();
+	
 	private int ogreCount = 0;
 	private State state = State.LEVEL1;
+	private GameLogic currentLevel;
 
-	public Game() {
-		map = new GameMap(this.state);
-		hero = new Hero();
-		guard = new Guard();
-		lever = new Lever(7, 8);
-		doors.add(new Door(new CellPosition(0, 5)));
-		doors.add(new Door(new CellPosition(0, 6)));
+	public Game(Personality person) {
+		this.setCurrentLevel(new DungeonLevel(person));
 	}
 
 	public State updateGame(Direction move) {
 
 		switch (state) {
 		case LEVEL1:
-			if (dungeonLevel(move)) {// passed dungeon level
+			if (currentLevel.updateGame(move)) {// passed dungeon level
 				this.state = State.FROM1TO2;
 			} else {
-				if (this.hero.isDead())
+				if (currentLevel.isHeroDead())
 					state = State.DEFEAT;
 			}
 			break;
 
 		case FROM1TO2:
 			System.out.println(this); // prints hero getting on stairs
-
-			hero = new Hero(1, 7);
-			guard = null;
-			lever = new Lever(7, 1);
-			doors.clear();
-			doors.add(new Door(new CellPosition(0, 1)));
-			map = new GameMap(this.state);
-			this.setOgres(ogreCount);
-
+			this.setCurrentLevel(new KeepLevel(ogreCount)); //creates ogre map
 			state = State.LEVEL2;
 			break;
 
 		case LEVEL2:
-			if (keepLevel(move)) {
+			if (currentLevel.updateGame(move)) {
 
 				state = State.WON;
 			} else {
-				if (this.hero.isDead())
+				if (currentLevel.isHeroDead())
 					state = State.DEFEAT;
 			}
 			break;
@@ -73,63 +55,12 @@ public class Game {
 		return state;
 	}
 
-	private boolean dungeonLevel(Direction move) {// returns true if passed
-													// level, false otherwise
-		boolean done = false;
-
-		// move hero
-		if (!map.heroMovePossible(hero, move))// prevent guard from moving
-			return false; // if hero moves to wall/closed door
-
-		hero.move(map, move);
-
-		// move guard
-		guard.nextMove();
-
-		// checks if hero is at lever position if he hasn't the key already
-		if (!hero.hasKey()) {
-			if (hero.turnLever(lever)) {
-				map.openDoors();
-				for (Door door : doors) {
-					door.openDoor();
-				}
-			}
-		}
-
-		// checks if hero is going to die
-		if (hero.isAdjacent(guard) && (!guard.isAsleep())) {
-			hero.setDead(true);
-		}
-
-		// checks if hero is at a stair
-		for (Door door : doors) {
-			if (hero.getPosition().equals(door.getPosition()) && door.isOpen()) {
-				done = true;
-				break;
-			}
-		}
-
-		return done;
-	}
-
-	private boolean keepLevel(Direction move) {// returns true if passed level,
-												// false otherwise
-		boolean done = false;
-
-		// move hero
-		if (!map.heroMovePossible(hero, move))// prevent guard from moving
-			return false; // if hero moves to wall/closed door
-
-		hero.move(map, move);
-
-		return done;
-	}
-
 	// -------------------------PRINT--------------------------------------------
 
 	@Override
 	public String toString() {
 		String res = "\n";
+		res += currentLevel.printMap();
 
 		for (int i = 0; i < map.getMap().length; i++) {
 			for (int j = 0; j < map.getMap()[i].length; j++) {
@@ -183,22 +114,6 @@ public class Game {
 
 	// --------------------------------------------------------------------------
 
-	public Hero getHero() {
-		return hero;
-	}
-
-	public void setHero(Hero hero) {
-		this.hero = hero;
-	}
-
-	public Guard getGuard() {
-		return guard;
-	}
-
-	public void setGuard(Personality type) {
-		this.guard.setPersonality(type);
-	}
-
 	public State getState() {
 		return state;
 	}
@@ -206,41 +121,21 @@ public class Game {
 	public void setState(State state) {
 		this.state = state;
 	}
-
-	public Lever getLever() {
-		return lever;
-	}
-
-	public void setLever(Lever lever) {
-		this.lever = lever;
-	}
-
-	public ArrayList<Door> getDoors() {
-		return doors;
-	}
-
-	public void setDoors(ArrayList<Door> doors) {
-		this.doors = doors;
-	}
-
-	public ArrayList<Ogre> getOgres() {
-		return ogres;
-	}
-
-	public void setOgres(int ogreCount) {
-		int x = 0;
-		while (x != ogreCount) {
-			this.ogres.add(new Ogre());
-			x++;
-		}
-	}
-
+	
 	public int getOgreCount() {
 		return ogreCount;
 	}
 
 	public void setOgreCount(int ogreCount) {
 		this.ogreCount = ogreCount;
+	}
+
+	public GameLogic getCurrentLevel() {
+		return currentLevel;
+	}
+
+	public void setCurrentLevel(GameLogic currentLevel) {
+		this.currentLevel = currentLevel;
 	}
 
 }
