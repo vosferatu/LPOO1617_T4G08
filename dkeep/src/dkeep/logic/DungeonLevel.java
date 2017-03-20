@@ -70,8 +70,32 @@ public class DungeonLevel extends Level {
 
 	@Override
 	public String printMap() {
-		// TODO Auto-generated method stub
-		return null;
+		String res = "\n";
+		
+		for (int i = 0; i < map.getMap().length; i++) {
+			for(int j = 0; j < map.getMap()[i].length; j++){
+				boolean noChar = true;
+				
+				if(hero.isAt(j, i) || (hero.isAt(j, i) && lever.getPosition().isAt(j, i))){
+					res += hero; noChar = false;
+				}
+				
+				if(lever.getPosition().isAt(j, i) && !hero.isAt(j, i)){
+					res += lever; noChar = false;
+				}
+				
+				if(guard.isAt(j, i)){
+					res += guard; noChar = false;
+				}
+				
+				if(noChar)
+					res += map.getMap()[i][j];
+				
+				res += " ";
+			}
+			res += "\n";
+		}
+		return res;
 	}
 
 }

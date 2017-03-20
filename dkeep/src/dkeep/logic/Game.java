@@ -1,7 +1,5 @@
 package dkeep.logic;
 
-import java.util.ArrayList;
-
 public class Game {
 	
 	private int ogreCount = 0;
@@ -61,54 +59,6 @@ public class Game {
 	public String toString() {
 		String res = "\n";
 		res += currentLevel.printMap();
-
-		for (int i = 0; i < map.getMap().length; i++) {
-			for (int j = 0; j < map.getMap()[i].length; j++) {
-				boolean noChar = true;
-
-				if (hero.isAt(j, i)) {
-					res += hero;
-					noChar = false;
-				} else if (guard.isAt(j, i)) {
-					res += guard;
-					noChar = false;
-				} else {
-					for (Ogre x : ogres) {
-						if (x.getClub().getPosition().isAt(j, i)) {
-							if (lever.getPosition().isAt(j, i)) {
-								res += "$";
-								noChar = false;
-								break;
-							} else {
-								res += x.getClub();
-								noChar = false;
-								break;
-							}
-						} else if (x.isAt(j, i)) {
-							if (lever.getPosition().isAt(j, i)) {
-								res += "$";
-								noChar = false;
-								break;
-							} else {
-								res += x;
-								noChar = false;
-								break;
-							}
-						}
-					}
-				}
-				if (noChar) {
-					if (lever.getPosition().isAt(j, i)) {
-						res += lever;
-					} else {
-						res += map.getMap()[i][j];
-					}
-				}
-				res += " ";
-			}
-			res += "\n";
-
-		}
 		return res;
 	}
 
