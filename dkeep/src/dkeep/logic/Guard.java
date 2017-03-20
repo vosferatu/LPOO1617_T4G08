@@ -56,30 +56,36 @@ public class Guard extends Character{
 		
 		
 		if(this.personality == Personality.DRUNKEN){
+		    Random rand = new Random();
+		    
+		    int randomN = rand.nextInt(2);
+		    
 			if(asleep > 0){
 				asleep--;
 				if(asleep == 0){
-				    Random rand = new Random();
-				    
-				    int randomN = rand.nextInt(2);
-				    
 				    if(randomN == 0){
 				    	if(direction == Direction.RIGHT)
 				    		direction = Direction.LEFT;
 				    	else direction = Direction.RIGHT;
 				    }
 				}
-				return;
+
+				return;	
 			}
 			else{
 				
+				randomN = rand.nextInt(4);
+				if(randomN == 0){
+					this.asleep = 2;
+					return;
+				}
 			}
 			
 
 			
 			this.setPosition(this.moves[moveNum]);
 			if(direction == Direction.LEFT){
-				
+				moveNum--;
 			} else {
 				moveNum++;
 			}
