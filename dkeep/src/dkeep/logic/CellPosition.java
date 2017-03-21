@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.Random;
+
 public class CellPosition {
 	private int x;
 	private int y;
@@ -61,6 +63,25 @@ public class CellPosition {
 				(this.x == check.x && this.y == check.y+1) )
 			return true;
 		else return false;
+	}
+	
+	public CellPosition getAdjacent(CellPosition cell){
+		Random rand = new Random();
+		int randomN = rand.nextInt(4);
+		
+		switch (randomN){
+		case 0:
+			return new CellPosition(cell.x-1, cell.y);
+		case 1:
+			return new CellPosition(cell.x+1, cell.y);
+		case 2:
+			return new CellPosition(cell.x, cell.y-1);
+		case 3:
+			return new CellPosition(cell.x, cell.y+1);
+		default:
+			return new CellPosition(cell.x, cell.y+1);
+		}
+		
 	}
 	
 }

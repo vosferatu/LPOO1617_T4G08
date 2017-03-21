@@ -68,5 +68,10 @@ public class Ogre extends Character {
 	public void setClub(Club club) {
 		this.club = club;
 	}
+
+	public void nextMove() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

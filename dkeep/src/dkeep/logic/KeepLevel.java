@@ -27,6 +27,13 @@ public class KeepLevel extends Level {
 
 		hero.move(map, move);
 
+		//move ogres and respective clubs
+		for (Ogre ogre : ogres) {
+			ogre.nextMove();
+		}
+		
+		
+		
 		return done;
 	}
 

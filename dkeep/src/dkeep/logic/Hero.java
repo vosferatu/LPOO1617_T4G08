@@ -78,7 +78,12 @@ public class Hero extends Character {
 
 	@Override
 	public String toString() {
-		return "" + id;
+		if(hasKey())
+			return "K";
+		
+		if(!isArmed())
+			return "" + id;
+		else return "A";
 	}
 	
 	

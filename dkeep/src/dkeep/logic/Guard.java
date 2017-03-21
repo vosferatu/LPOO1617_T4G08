@@ -9,6 +9,7 @@ public class Guard extends Character{
 	private int moveNum = 0;
 	private Personality personality = Personality.SIMPLE;
 	private Direction direction = Direction.RIGHT;//direction in vector of positions
+	private int lastCheck = 0;
 	
 	public Guard() {
 		this.id = 'G';
@@ -76,7 +77,7 @@ public class Guard extends Character{
 				
 				randomN = rand.nextInt(4);
 				if(randomN == 0){
-					this.asleep = 2;
+					this.asleep = 3;
 					return;
 				}
 			}
@@ -99,10 +100,30 @@ public class Guard extends Character{
 		
 		
 		if(this.personality == Personality.SUSPICIOUS){
-			if(moveNum == 24)
-				moveNum = 0;
+			Random rand = new Random();
+			int randomN = rand.nextInt(2);
+			if(lastCheck > 5 && randomN == 0 ){
+				lastCheck = 0;
+		    	if(direction == Direction.RIGHT)
+		    		direction = Direction.LEFT;
+		    	else direction = Direction.RIGHT;
+		    	
+			} else {
+				lastCheck++;
+			}
+			
 			this.setPosition(this.moves[moveNum]);
-			moveNum++;
+			if(direction == Direction.LEFT){
+				moveNum--;
+			} else {
+				moveNum++;
+			}
+		
+			if(moveNum < 0)
+				moveNum = 23;
+		
+			if(moveNum > 23)
+				moveNum = 0;
 		}
 		
 	}
@@ -147,6 +168,14 @@ public class Guard extends Character{
 
 	public void setDirection(Direction direction) {
 		this.direction = direction;
+	}
+
+	public int getLastCheck() {
+		return lastCheck;
+	}
+
+	public void setLastCheck(int lastCheck) {
+		this.lastCheck = lastCheck;
 	}
 	
 }

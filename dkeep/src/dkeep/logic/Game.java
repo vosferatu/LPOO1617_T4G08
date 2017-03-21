@@ -15,17 +15,12 @@ public class Game {
 		switch (state) {
 		case LEVEL1:
 			if (currentLevel.updateGame(move)) {// passed dungeon level
-				this.state = State.FROM1TO2;
+				this.setCurrentLevel(new KeepLevel(ogreCount)); //creates ogre map
+				this.state = State.LEVEL2;
 			} else {
 				if (currentLevel.isHeroDead())
 					state = State.DEFEAT;
 			}
-			break;
-
-		case FROM1TO2:
-			System.out.println(this); // prints hero getting on stairs
-			this.setCurrentLevel(new KeepLevel(ogreCount)); //creates ogre map
-			state = State.LEVEL2;
 			break;
 
 		case LEVEL2:
