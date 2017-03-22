@@ -44,7 +44,7 @@ public class Guard extends Character{
 	}
 
 	public void nextMove(){
-		Random rand = new Random();
+		Random rand = new Random(System.currentTimeMillis());
 		int randomN = rand.nextInt(3);
 		
 		if(this.personality == Personality.SIMPLE)
