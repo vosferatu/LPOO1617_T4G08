@@ -45,6 +45,7 @@ public class Guard extends Character{
 
 	public void nextMove(){
 		Random rand = new Random();
+		int randomN = rand.nextInt(3);
 		
 		if(this.personality == Personality.SIMPLE)
 			return;
@@ -59,7 +60,6 @@ public class Guard extends Character{
 
 
 		if(this.personality == Personality.DRUNKEN){
-			int randomN = rand.nextInt(3);
 
 			if(isAsleep() == true){
 				
@@ -101,7 +101,7 @@ public class Guard extends Character{
 
 
 		if(this.personality == Personality.SUSPICIOUS){
-			int randomN = rand.nextInt(2);
+			randomN = rand.nextInt(2);
 			if(lastCheck > 5 && randomN == 0 ){
 				lastCheck = 0;
 				this.changeDirection();
