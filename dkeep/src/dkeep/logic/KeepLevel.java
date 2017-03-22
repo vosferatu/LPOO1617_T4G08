@@ -2,10 +2,21 @@ package dkeep.logic;
 
 import java.util.ArrayList;
 
+/**
+ * @author João Mendes
+ * class to represent the ogre level
+ */
 public class KeepLevel extends Level {
 
+	/**
+	 * stores the ogres
+	 */
 	private ArrayList<Ogre> ogres = new ArrayList<Ogre>();
 	
+	/**
+	 * creates a new keep level
+	 * @param ogreNum number of ogres to be added
+	 */
 	public KeepLevel(int ogreNum) {
 		map = new GameMap(this);
 		hero = new Hero(1, 7);
@@ -17,6 +28,9 @@ public class KeepLevel extends Level {
 		}
 	}
 
+	/**
+	 * @see dkeep.logic.GameLogic#updateGame(dkeep.logic.Direction)
+	 */
 	@Override
 	public boolean updateGame(Direction move) {// returns true if passed level,
 		boolean done = false;						// false otherwise
@@ -29,7 +43,7 @@ public class KeepLevel extends Level {
 
 		//move ogres and respective clubs
 		for (Ogre ogre : ogres) {
-			ogre.nextMove();
+			ogre.move(this.getMap());
 		}
 		
 		
@@ -37,19 +51,33 @@ public class KeepLevel extends Level {
 		return done;
 	}
 
+	/**
+	 * @see dkeep.logic.GameLogic#isHeroDead()
+	 */
 	@Override
 	public boolean isHeroDead() {
 		return this.hero.isDead();
 	}
 
+	/**
+	 * gets the ogres of the level
+	 * @return ogres
+	 */
 	public ArrayList<Ogre> getOgres() {
 		return ogres;
 	}
 
+	/**
+	 * sets the ogres
+	 * @param ogres new ogres
+	 */
 	public void setOgres(ArrayList<Ogre> ogres) {
 		this.ogres = ogres;
 	}
 
+	/**
+	 * @see dkeep.logic.GameLogic#printMap()
+	 */
 	@Override
 	public String printMap() {
 		String res = "\n";

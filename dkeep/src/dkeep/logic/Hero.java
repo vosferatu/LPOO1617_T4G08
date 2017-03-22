@@ -145,6 +145,4 @@ public class Hero extends Character {
 		else return "A";
 	}
 	
-	
-	
 }
