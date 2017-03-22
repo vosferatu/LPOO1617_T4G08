@@ -1,10 +1,27 @@
 package dkeep.logic;
 
+/**
+ * @author João Mendes
+ *	class to represent the game map
+ */
 public class GameMap {
+	/**
+	 * represents the game map in characters
+	 */
 	public char [][] map = null;
+	/**
+	 * represents the game's width 
+	 */
 	private int width;
+	/**
+	 * represents the game's height
+	 */
 	private int height;
 
+	/**
+	 * creates a new game map according to the level
+	 * @param level of the map
+	 */
 	public GameMap(Level level){
 		
 		if(level instanceof DungeonLevel){
@@ -39,6 +56,10 @@ public class GameMap {
 	}
 	
 
+	/**
+	 * creates a new game map
+	 * @param map2 char matrix
+	 */
 	public GameMap(char[][] map2) {
 		this.map = map2;
 		this.height = map2.length;
@@ -46,6 +67,9 @@ public class GameMap {
 	}
 
 
+	/**
+	 * converts the map to a string
+	 */
 	@Override
 	public String toString() {
 		String mapa = "\n";
@@ -60,6 +84,12 @@ public class GameMap {
 		return mapa;
 	}
 	
+	/**
+	 * checks if the her0's move is possible
+	 * @param hero hero
+	 * @param move direction
+	 * @return true if possible to move, false otherwise
+	 */
 	public boolean heroMovePossible(Hero hero, Direction move) {
 		int x = hero.getPosition().getX();
 		int y = hero.getPosition().getY();
@@ -95,32 +125,59 @@ public class GameMap {
 			return false;
 	}
 	
+	/**
+	 * gets the map's width
+	 * @return width
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * sets the map's width
+	 * @param width new width
+	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
+	/**
+	 * gets the map's height
+	 * @return height
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * sets the map's height
+	 * @param height new height
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
 
 
+	/**
+	 * gets the current map
+	 * @return map
+	 */
 	public char[][] getMap() {
 		return map;
 	}
 
 
+	/**
+	 * sets the current map
+	 * @param map new map
+	 */
 	public void setMap(char[][] map) {
 		this.map = map;
 	}
 	
+	/**
+	 * opens map's doors. changes 'I's to 'S's
+	 */
 	public void openDoors(){
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++){

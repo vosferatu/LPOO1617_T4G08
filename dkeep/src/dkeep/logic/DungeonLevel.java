@@ -1,9 +1,20 @@
 package dkeep.logic;
 
+/**
+ * @author João Mendes
+ *	represents the guard level
+ */
 public class DungeonLevel extends Level {
 	
+	/**
+	 * represents the guard
+	 */
 	private Guard guard = null;
 
+	/**
+	 * creates a new dungeon level 
+	 * @param personality guard's personality
+	 */
 	public DungeonLevel(Personality personality) {
 		map = new GameMap(this);
 		hero = new Hero();
@@ -15,6 +26,9 @@ public class DungeonLevel extends Level {
 		doors.add(new Door(new CellPosition(0, 6)));
 	}
 
+	/**
+	 * @see dkeep.logic.GameLogic#updateGame(dkeep.logic.Direction)
+	 */
 	@Override
 	public boolean updateGame(Direction move) {// returns true if passed
 		boolean done = false;				// level, false otherwise
@@ -55,20 +69,34 @@ public class DungeonLevel extends Level {
 
 	}
 
+	/**
+	 * @see dkeep.logic.GameLogic#isHeroDead()
+	 */
 	@Override
 	public boolean isHeroDead() {
 		return hero.isDead();
 	}
 
+	/**
+	 * gets the guard
+	 * @return guard
+	 */
 	public Guard getGuard() {
 		return guard;
 	}
 
+	/**
+	 * sets the current guard
+	 * @param guard new guard
+	 */
 	public void setGuard(Guard guard) {
 		this.guard = guard;
 	}
 
 	//TODO: check hero overlapping guard when the latter is asleep: "Hg"
+	/**
+	 * @see dkeep.logic.GameLogic#printMap()
+	 */
 	@Override
 	public String printMap() {
 		String res = "\n";
