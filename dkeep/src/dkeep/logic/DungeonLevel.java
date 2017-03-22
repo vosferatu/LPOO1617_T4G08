@@ -68,6 +68,7 @@ public class DungeonLevel extends Level {
 		this.guard = guard;
 	}
 
+	//TODO: check hero overlapping guard when the latter is asleep: "Hg"
 	@Override
 	public String printMap() {
 		String res = "\n";
