@@ -89,7 +89,7 @@ public class Guard extends Character{
 	 */
 	public void nextMove(){
 		Random rand = new Random(System.currentTimeMillis());
-		int randomN = rand.nextInt(3);
+		int randomN = 0;
 		
 		if(this.personality == Personality.SIMPLE)
 			return;
@@ -104,15 +104,20 @@ public class Guard extends Character{
 
 
 		if(this.personality == Personality.DRUNKEN){
-
+			
 			if(isAsleep() == true){
-				
+				randomN = rand.nextInt(2);
 				if(randomN == 0){
-					this.wakeUp(); //wakes up 1/3 of the time
+					this.wakeUp(); //wakes up 1/2 of the time
 					
 					randomN = rand.nextInt(2);
 					if(randomN == 0){//changes direction 1/2 of the time
 						this.changeDirection();
+						if(direction == Direction.LEFT){
+							moveNum--;
+						} else {
+							moveNum++;
+						}
 					}
 				}
 
@@ -120,20 +125,11 @@ public class Guard extends Character{
 			}
 			else{ //is awake
 
-				randomN = rand.nextInt(5);//goes asleep 1/5 of the time
+				randomN = rand.nextInt(4);//goes asleep 1/4 of the time
 				if(randomN == 2){
 					this.setAsleep(true);
 					return; //doesn't move
 				}
-			}
-
-
-			//moves
-			this.setPosition(this.moves[moveNum]);
-			if(direction == Direction.LEFT){
-				moveNum--;
-			} else {
-				moveNum++;
 			}
 
 			if(moveNum < 0)
@@ -141,14 +137,26 @@ public class Guard extends Character{
 
 			if(moveNum > 23)
 				moveNum = 0;
+			
+			//moves
+			this.setPosition(this.moves[moveNum]);
+			
+			if(direction == Direction.LEFT){
+				moveNum--;
+			} else {
+				moveNum++;
+			}
 		} 
 
 
 		if(this.personality == Personality.SUSPICIOUS){
-			randomN = rand.nextInt(2);
-			if(lastCheck > 5 && randomN == 0 ){
-				lastCheck = 0;
-				this.changeDirection();
+
+			if(lastCheck > 5){
+				randomN = rand.nextInt(2);
+				if(randomN == 0){
+					lastCheck = 0;
+					this.changeDirection();					
+				}
 
 			} else {
 				lastCheck++;
@@ -219,7 +227,7 @@ public class Guard extends Character{
 	 * asleep turn false
 	 */
 	public void wakeUp(){
-		this.asleep = true;
+		this.asleep = false;
 	}
 
 	/**

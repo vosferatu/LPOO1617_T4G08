@@ -112,7 +112,7 @@ public class ConsoleRunner {
 	}
 	
 	private static void printDungeon(Game game) {
-		System.out.println(game);
+		System.out.println(game + "\n");
 	}
 
 	private static Direction getHeroMove(Scanner scanner) {

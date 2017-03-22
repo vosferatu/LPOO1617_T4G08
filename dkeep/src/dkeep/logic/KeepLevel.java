@@ -80,7 +80,7 @@ public class KeepLevel extends Level {
 	 */
 	@Override
 	public String printMap() {
-		String res = "\n";
+		String res = "";
 
 		for (int i = 0; i < map.getMap().length; i++) {
 			for (int j = 0; j < map.getMap()[i].length; j++) {
@@ -123,7 +123,8 @@ public class KeepLevel extends Level {
 				}
 				res += " ";
 			}
-			res += "\n";
+			if(i != (map.getMap().length-1))
+				res += "\n";
 
 		}
 		return res;

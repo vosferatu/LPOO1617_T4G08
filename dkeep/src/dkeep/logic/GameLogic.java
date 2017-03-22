@@ -9,7 +9,7 @@ public interface GameLogic {
 	/**
 	 * issues hero's move and updates game elements
 	 * @param move direction to move hero
-	 * @return true if won level or was defeated, otherwise is still playing
+	 * @return true if won level, otherwise is still playing or was defeated
 	 */
 	boolean updateGame(Direction move);
 	

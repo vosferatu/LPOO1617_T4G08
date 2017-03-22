@@ -43,8 +43,35 @@ public class CellPosition {
 	 * @param pos
 	 */
 	public CellPosition(CellPosition pos) {
-		x = pos.getX();
-		y = pos.getY();
+		this.x = pos.getX();
+		this.y = pos.getY();
+	}
+	
+	/**
+	 * adds a move(adjacent) to a cell position
+	 * @param move move to perform
+	 */
+	public void addMove(Direction move){
+			switch (move) {
+			
+			case RIGHT:
+				this.x++;
+			break;
+			
+			case DOWN:
+				this.y++;
+			break;
+	
+			case LEFT:
+				this.x--;
+			break;
+	
+			case UP:
+				this.y--;
+			break;
+		default:
+			break;
+		}
 	}
 
 	/**
@@ -80,19 +107,29 @@ public class CellPosition {
 	}
 	
 	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
 	 * compares two CellPositions
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof CellPosition))
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
-
-		CellPosition check = (CellPosition) obj;
-		
-		return (this.x == check.x && this.y == check.y);
+		}
+		if (!(obj instanceof CellPosition)) {
+			return false;
+		}
+		CellPosition other = (CellPosition) obj;
+		if (x != other.x) {
+			return false;
+		}
+		if (y != other.y) {
+			return false;
+		}
+		return true;
 	}
-	
+
 	/**
 	 * checks if a cell position is at given coordinate
 	 * @param x value

@@ -111,9 +111,9 @@ public class GameMap {
 					return (map[y][x - 1] != 'X');
 			break;
 
-		case UP:
-			if (map[y - 1][x] != 'I')
-				return (map[y - 1][x] != 'X');
+			case UP:
+				if (map[y - 1][x] != 'I')
+					return (map[y - 1][x] != 'X');
 			break;
 		default:
 			break;

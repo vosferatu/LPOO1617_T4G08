@@ -30,13 +30,16 @@ public class DungeonLevel extends Level {
 	 * @see dkeep.logic.GameLogic#updateGame(dkeep.logic.Direction)
 	 */
 	@Override
-	public boolean updateGame(Direction move) {// returns true if passed
-		boolean done = false;				// level, false otherwise
+	public boolean updateGame(Direction move) {// returns true if passed level,
+		boolean done = false;				// false otherwise
 
 		// move hero
 		if (!map.heroMovePossible(hero, move))// prevent guard from moving
 			return false; // if hero moves to wall/closed door
 
+		if(heroOverlapingGuard(move))//prevent hero from moving into guard
+			return false;
+		
 		hero.move(map, move);
 
 		// move guard
@@ -55,6 +58,7 @@ public class DungeonLevel extends Level {
 		// checks if hero is going to die
 		if (hero.isAdjacent(guard) && (!guard.isAsleep())) {
 			hero.setDead(true);
+			return false;
 		}
 
 		// checks if hero is at a stair
@@ -93,13 +97,31 @@ public class DungeonLevel extends Level {
 		this.guard = guard;
 	}
 
-	//TODO: check hero overlapping guard when the latter is asleep: "Hg"
+	/**
+	 * checks if hero is moving into guard
+	 * @param move direction of the move
+	 * @return true if hero is moving into guard, false otherwise
+	 */
+	public boolean heroOverlapingGuard(Direction move){
+		boolean res = false;
+		
+		CellPosition nova = new CellPosition(hero.getPosition());
+		nova.addMove(move);
+		
+		if(nova.equals(guard.getPosition()))
+			res = true;
+		else res = false;
+		
+		return res;
+	}
+	
+	
 	/**
 	 * @see dkeep.logic.GameLogic#printMap()
 	 */
 	@Override
 	public String printMap() {
-		String res = "\n";
+		String res = "";
 		
 		for (int i = 0; i < map.getMap().length; i++) {
 			for(int j = 0; j < map.getMap()[i].length; j++){
@@ -122,7 +144,8 @@ public class DungeonLevel extends Level {
 				
 				res += " ";
 			}
-			res += "\n";
+			if(i != (map.getMap().length-1))
+				res += "\n";
 		}
 		return res;
 	}
