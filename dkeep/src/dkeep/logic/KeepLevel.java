@@ -32,6 +32,34 @@ public class KeepLevel extends Level {
 	}
 
 	/**
+	 * creates a new keep level using a new map
+	 * @param gameMap new map
+	 */
+	public KeepLevel(GameMap gameMap) {
+		this.setMap(gameMap);
+		
+		for (int i = 0; i < gameMap.getMap().length; i++) {
+			for (int j = 0; j < gameMap.getMap()[i].length; j++){
+				if(gameMap.getMap()[i][j] == 'O'){
+					ogres.add(new Ogre(j,i));
+				}
+				if(gameMap.getMap()[i][j] == 'H' && hero == null){
+					setHero(new Hero(j,i));
+					hero.setArmed(true);
+					hero.setDead(false);
+					hero.setHasKey(false);
+				}
+				if(gameMap.getMap()[i][j] == 'I'){
+					doors.add(new Door(new CellPosition(j, i)));
+				}
+				if(gameMap.getMap()[i][j] == 'k' && lever == null){
+					setLever(new Lever(j,i));
+				}
+			}
+		}
+	}
+	
+	/**
 	 * @see dkeep.logic.GameLogic#updateGame(dkeep.logic.Direction)
 	 */
 	@Override

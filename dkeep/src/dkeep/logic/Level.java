@@ -90,4 +90,9 @@ public abstract class Level implements GameLogic {
 		this.doors = doors;
 	}
 	
+	@Override
+	public CellPosition getHeroPosition() {
+		return hero.getPosition();
+	}
+	
 }

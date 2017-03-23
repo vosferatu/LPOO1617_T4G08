@@ -203,5 +203,4 @@ public class GameMap {
 			map[ypos][xpos] = 'S';
 		
 	}
-	
 }

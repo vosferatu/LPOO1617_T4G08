@@ -11,10 +11,12 @@ public class Game {
 	 * represents the number of ogres
 	 */
 	private int ogreCount = 0;
+	
 	/**
 	 * represents the current game state
 	 */
 	private State state = State.LEVEL1;
+	
 	/**
 	 * represents the game's current level
 	 */
@@ -26,6 +28,36 @@ public class Game {
 	 */
 	public Game(Personality person) {
 		this.setCurrentLevel(new DungeonLevel(person));
+	}
+
+	/**
+	 * creates a new game using a given map
+	 * @param gameMap new game map
+	 */
+	public Game(GameMap gameMap) {
+		int level = 0;
+		for (int i = 0; i < gameMap.getMap().length; i++) {
+			if(level > 0) break;
+			for (int j = 0; j < gameMap.getMap()[i].length; j++){
+				if(level > 0) break;
+				if(gameMap.getMap()[i][j] == 'O')
+					level = 2;
+				if(gameMap.getMap()[i][j] == 'G')
+					level = 1;
+			}
+		}
+		
+		switch(level){
+			case 1:
+				this.setCurrentLevel(new DungeonLevel(gameMap));
+				break;
+			case 2:
+				this.setCurrentLevel(new KeepLevel(gameMap));
+				this.setState(State.LEVEL2);
+				break;
+			default:
+				break;
+		}	
 	}
 
 	/**
@@ -130,6 +162,20 @@ public class Game {
 	 */
 	public void setCurrentLevel(GameLogic currentLevel) {
 		this.currentLevel = currentLevel;
+	}
+
+	/**
+	 * checks if game is over
+	 * @return true if game is over, false otherwise
+	 */
+	public boolean isGameOver() {
+		if(state == State.DEFEAT || state == State.WON)
+			return true;
+		else return false;
+	}
+
+	public CellPosition getHeroPosition() {
+		return currentLevel.getHeroPosition();
 	}
 
 }

@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import dkeep.logic.CellPosition;
+import dkeep.logic.Direction;
 import dkeep.logic.Game;
 import dkeep.logic.GameMap;
+import dkeep.logic.State;
 
 
 public class TestDungeonGameLogic {
@@ -22,7 +24,7 @@ public class TestDungeonGameLogic {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
-		game.moveHero('s');
+		game.updateGame(Direction.DOWN);
 		assertEquals(new CellPosition(2,1), game.getHeroPosition());
 	}
 
@@ -31,9 +33,9 @@ public class TestDungeonGameLogic {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
 		assertFalse(game.isGameOver());
-		game.moveHero('d');
+		game.updateGame(Direction.RIGHT);
 		assertTrue(game.isGameOver());
-		assertEquals(Game.DEFEAT, game.getEndStatus());
+		assertEquals(State.DEFEAT, game.getState());
 	}	
 	
 }

@@ -25,6 +25,34 @@ public class DungeonLevel extends Level {
 		doors.add(new Door(new CellPosition(0, 5)));
 		doors.add(new Door(new CellPosition(0, 6)));
 	}
+	
+	/**
+	 * creates a new dungeon level using a new map
+	 * @param gameMap new map
+	 */
+	public DungeonLevel(GameMap gameMap) {
+		for (int i = 0; i < gameMap.getMap().length; i++) {
+			for (int j = 0; j < gameMap.getMap()[i].length; j++){
+				if(gameMap.getMap()[i][j] == 'G' && guard == null){
+					setGuard(new Guard());
+					guard.setPosition(new CellPosition(j,i));
+					guard.setPersonality(Personality.SIMPLE);
+				}
+				if(gameMap.getMap()[i][j] == 'H' && hero == null){
+					setHero(new Hero(j,i));
+					hero.setArmed(false);
+					hero.setDead(false);
+					hero.setHasKey(false);
+				}
+				if(gameMap.getMap()[i][j] == 'k' && lever == null){
+					setLever(new Lever(j,i));
+				}
+				if(gameMap.getMap()[i][j] == 'I'){
+					doors.add(new Door(new CellPosition(j, i)));
+				}
+			}
+		}
+	}
 
 	/**
 	 * @see dkeep.logic.GameLogic#updateGame(dkeep.logic.Direction)

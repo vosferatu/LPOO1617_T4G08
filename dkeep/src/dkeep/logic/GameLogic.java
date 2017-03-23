@@ -25,4 +25,6 @@ public interface GameLogic {
 	 */
 	String printMap();
 	
+	CellPosition getHeroPosition();
+	
 }
