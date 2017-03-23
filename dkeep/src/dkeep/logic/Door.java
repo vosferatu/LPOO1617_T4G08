@@ -94,4 +94,13 @@ public class Door {
 		this.isOpen = isOpen;
 	}
 
+	@Override
+	public String toString() {
+		if (isOpen())
+			return "S";
+		else return "" + id;
+	}
+
+	
+	
 }

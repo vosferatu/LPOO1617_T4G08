@@ -152,7 +152,7 @@ public class Guard extends Character{
 		if(this.personality == Personality.SUSPICIOUS){
 
 			if(lastCheck > 5){
-				randomN = rand.nextInt(2);
+				randomN = rand.nextInt(3);
 				if(randomN == 0){
 					lastCheck = 0;
 					this.changeDirection();					

@@ -144,5 +144,23 @@ public class Hero extends Character {
 			return "" + id;
 		else return "A";
 	}
+
+	/**
+	 * checks if a hero is trying to open the door with a key
+	 * @param move direction of the movement
+	 * @param door to be open
+	 * @return true if hero is trying to open door, false otherwise
+	 */
+	public boolean movesToDoor(Direction move, Door door) {
+		Hero novo = new Hero();
+		novo.setPosition(new CellPosition(this.getPosition()));
+
+		novo.position.addMove(move);
+		
+
+		if(novo.isAt(door.getPosition()))
+			return true;
+		else return false;
+	}
 	
 }

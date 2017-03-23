@@ -37,10 +37,19 @@ public class KeepLevel extends Level {
 	@Override
 	public boolean updateGame(Direction move) {// returns true if passed level,
 		boolean done = false;						// false otherwise
-
+		
 		// move hero
-		if (!map.heroMovePossible(hero, move))// prevent guard from moving
+		if (!map.heroMovePossible(hero, move)){// prevent ogre from moving
+			//check if hero can open door
+			for (Door door : doors) {
+				if((!door.isOpen()) && hero.movesToDoor(move, door) && hero.hasKey()){
+					door.openDoor();
+					return false;
+				}
+			}
 			return false; // if hero moves to wall/closed door
+		}
+			
 
 		hero.move(map, move);
 
@@ -69,19 +78,26 @@ public class KeepLevel extends Level {
 			}
 		}
 		
+		//check if hero is going to die be ogre or club
 		for (Ogre ogre : ogres) {
 			if (hero.isAdjacent(ogre) && (!ogre.isStunned())) {
 				hero.setDead(true);
-				return false;
+				done = false;
 			}
 			
 			if(hero.getPosition().isAdjacent(ogre.getClub().getPosition())){
 				hero.setDead(true);
-				return false;
+				done = false;
 			}
 		}		
 		
-		
+		// checks if hero is at a stair
+		for (Door door : doors) {
+			if (hero.getPosition().equals(door.getPosition()) && door.isOpen()) {
+				done = true;
+				break;
+			}
+		}
 		
 		return done;
 	}
@@ -153,7 +169,14 @@ public class KeepLevel extends Level {
 					if (lever != null && lever.getPosition().isAt(j, i)) {
 						res += lever;
 					} else {
-						res += map.getMap()[i][j];
+						for (Door door : doors) {
+							if(door.getPosition().isAt(j,i)){
+								res += door;
+								noChar = false;
+							}
+						}
+						if(noChar)
+							res += map.getMap()[i][j];
 					}
 				}
 				res += " ";
