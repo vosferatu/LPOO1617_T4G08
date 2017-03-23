@@ -183,4 +183,13 @@ public class CellPosition {
 		
 	}
 	
+	/**
+	 * creates a "copy" of a cell position
+	 * @param cell a cell position
+	 */
+	public void setPosition(CellPosition cell) {
+		this.x = cell.x;
+		this.y = cell.y;
+	}
+	
 }

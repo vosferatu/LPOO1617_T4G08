@@ -47,7 +47,7 @@ public class DungeonLevel extends Level {
 
 		// checks if hero is at lever position if he hasn't the key already
 		if (!hero.hasKey()) {
-			if (hero.turnLever(lever)) {
+			if (hero.atLever(lever)) {
 				map.openDoors();
 				for (Door door : doors) {
 					door.openDoor();

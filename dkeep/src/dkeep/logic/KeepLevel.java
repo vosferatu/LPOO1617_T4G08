@@ -20,6 +20,9 @@ public class KeepLevel extends Level {
 	public KeepLevel(int ogreNum) {
 		map = new GameMap(this);
 		hero = new Hero(1, 7);
+		hero.setArmed(true);
+		hero.setDead(false);
+		hero.setHasKey(false);
 		lever = new Lever(7, 1);
 		doors.clear();
 		doors.add(new Door(new CellPosition(0, 1)));
@@ -45,6 +48,38 @@ public class KeepLevel extends Level {
 		for (Ogre ogre : ogres) {
 			ogre.move(this.getMap());
 		}
+		
+		//check if hero is at key position if he hsn't it already
+		if (!hero.hasKey()) {
+			if (hero.atLever(lever)) {
+				/*//only opens in the end
+				map.openDoors();
+				for (Door door : doors) {
+					door.openDoor();
+				}
+				*/
+				lever = null;
+			}
+		}
+		
+		//first stun the guards
+		for (Ogre ogre : ogres) {
+			if (hero.isAdjacent(ogre) && (!ogre.isStunned())){
+				ogre.setStun(2);
+			}
+		}
+		
+		for (Ogre ogre : ogres) {
+			if (hero.isAdjacent(ogre) && (!ogre.isStunned())) {
+				hero.setDead(true);
+				return false;
+			}
+			
+			if(hero.getPosition().isAdjacent(ogre.getClub().getPosition())){
+				hero.setDead(true);
+				return false;
+			}
+		}		
 		
 		
 		
@@ -92,7 +127,7 @@ public class KeepLevel extends Level {
 				} else {
 					for (Ogre x : ogres) {
 						if (x.getClub().getPosition().isAt(j, i)) {
-							if (lever.getPosition().isAt(j, i)) {
+							if (lever != null && lever.getPosition().isAt(j, i)) {
 								res += "$";
 								noChar = false;
 								break;
@@ -102,7 +137,7 @@ public class KeepLevel extends Level {
 								break;
 							}
 						} else if (x.isAt(j, i)) {
-							if (lever.getPosition().isAt(j, i)) {
+							if (lever != null && lever.getPosition().isAt(j, i)) {
 								res += "$";
 								noChar = false;
 								break;
@@ -115,7 +150,7 @@ public class KeepLevel extends Level {
 					}
 				}
 				if (noChar) {
-					if (lever.getPosition().isAt(j, i)) {
+					if (lever != null && lever.getPosition().isAt(j, i)) {
 						res += lever;
 					} else {
 						res += map.getMap()[i][j];

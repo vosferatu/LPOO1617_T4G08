@@ -124,7 +124,7 @@ public class Hero extends Character {
 	 * @param lever lever
 	 * @return true if hero is at level, false if isn't
 	 */
-	public boolean turnLever(Lever lever) {
+	public boolean atLever(Lever lever) {
 		if(this.position.equals(lever.getPosition())){
 			this.hasKey = true;
 			return true;

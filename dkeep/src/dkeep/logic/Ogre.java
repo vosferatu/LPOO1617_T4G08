@@ -51,6 +51,38 @@ public class Ogre extends Character {
 			return;
 		}
 		
+		CellPosition update = new CellPosition(); //ogre position
+		update.setPosition(position.getAdjacent()); //adjacent position to move into
+		boolean done = false;
+		
+		while(!done){
+			if(map.getMap()[update.getY()][update.getX()] != 'X' && 
+					map.getMap()[update.getY()][update.getX()] != 'I' ){
+				done = true;
+			}
+			else {
+				update.setPosition(position.getAdjacent());
+			}
+		}
+		
+		this.setPosition(update);
+		
+		CellPosition nova = new CellPosition(); //club position
+		nova.setPosition(position.getAdjacent()); //adjacent position to move into
+		boolean finish = false;
+		
+		while(!finish){
+			if(map.getMap()[nova.getY()][nova.getX()] != 'X' && 
+					map.getMap()[nova.getY()][nova.getX()] != 'I' ){
+				finish = true;
+			}
+			else {
+				nova.setPosition(position.getAdjacent());
+			}
+		}
+		
+		this.club.setPosition(nova);
+		
 	}
 
 	/**
@@ -119,6 +151,16 @@ public class Ogre extends Character {
 	 */
 	public void setClub(Club club) {
 		this.club = club;
+	}
+
+	/**
+	 * checks if an ogre is stunned
+	 * @return true if ogre is stunned, false otherwise
+	 */
+	public boolean isStunned() {
+		if(getStun() > 0)
+			return true;
+		return false;
 	}
 	
 }
