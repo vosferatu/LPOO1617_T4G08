@@ -38,6 +38,7 @@ public class KeepLevel extends Level {
 	public boolean updateGame(Direction move) {// returns true if passed level,
 		boolean done = false;						// false otherwise
 		
+		//TODO: extra movement to open the door
 		// move hero
 		if (!map.heroMovePossible(hero, move)){// prevent ogre from moving
 			//check if hero can open door
