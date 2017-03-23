@@ -38,13 +38,13 @@ public class KeepLevel extends Level {
 	public boolean updateGame(Direction move) {// returns true if passed level,
 		boolean done = false;						// false otherwise
 		
-		//TODO: extra movement to open the door
 		// move hero
 		if (!map.heroMovePossible(hero, move)){// prevent ogre from moving
-			//check if hero can open door
+			//check if hero can open door to cause extra movement
 			for (Door door : doors) {
 				if((!door.isOpen()) && hero.movesToDoor(move, door) && hero.hasKey()){
 					door.openDoor();
+					map.openDoor(door);
 					return false;
 				}
 			}
@@ -62,13 +62,8 @@ public class KeepLevel extends Level {
 		//check if hero is at key position if he hsn't it already
 		if (!hero.hasKey()) {
 			if (hero.atLever(lever)) {
-				/*//only opens in the end
-				map.openDoors();
-				for (Door door : doors) {
-					door.openDoor();
-				}
-				*/
 				lever = null;
+				hero.setHasKey(true);
 			}
 		}
 		
@@ -92,7 +87,7 @@ public class KeepLevel extends Level {
 			}
 		}		
 		
-		// checks if hero is at a stair
+		// checks if hero is going through door
 		for (Door door : doors) {
 			if (hero.getPosition().equals(door.getPosition()) && door.isOpen()) {
 				done = true;

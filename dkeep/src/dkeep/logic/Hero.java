@@ -152,13 +152,10 @@ public class Hero extends Character {
 	 * @return true if hero is trying to open door, false otherwise
 	 */
 	public boolean movesToDoor(Direction move, Door door) {
-		Hero novo = new Hero();
-		novo.setPosition(new CellPosition(this.getPosition()));
+		CellPosition hero = new CellPosition(this.position);
+		hero.addMove(move);
 
-		novo.position.addMove(move);
-		
-
-		if(novo.isAt(door.getPosition()))
+		if(hero.equals(door.getPosition()))
 			return true;
 		else return false;
 	}

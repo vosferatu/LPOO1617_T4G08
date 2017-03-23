@@ -48,7 +48,6 @@ public class Game {
 
 		case LEVEL2:
 			if (currentLevel.updateGame(move)) {
-
 				state = State.WON;
 			} else {
 				if (currentLevel.isHeroDead())

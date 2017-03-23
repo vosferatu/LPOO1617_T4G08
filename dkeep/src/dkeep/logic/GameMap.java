@@ -118,11 +118,12 @@ public class GameMap {
 		default:
 			break;
 		}
+		return false;
 		
-		if (hero.hasKey())
+		/*if (hero.hasKey())
 			return true;
 		else
-			return false;
+			return false;*/
 	}
 	
 	/**
@@ -185,6 +186,22 @@ public class GameMap {
 					map[i][j] = 'S';
 			}
 		}
+	}
+
+	/**
+	 * opens a specific door in the map
+	 * @param door door to be open
+	 */
+	public void openDoor(Door door) {
+		int xpos = door.getPosition().getX();
+		int ypos = door.getPosition().getY();
+		
+		if(xpos > width - 1) return;
+		if(ypos > height - 1) return;
+	
+		if(map[ypos][xpos] == 'I')
+			map[ypos][xpos] = 'S';
+		
 	}
 	
 }

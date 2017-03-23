@@ -55,19 +55,19 @@ public class CellPosition {
 			switch (move) {
 			
 			case RIGHT:
-				this.x++;
+				x = x + 1;
 			break;
 			
 			case DOWN:
-				this.y++;
+				y = y +1;
 			break;
 	
 			case LEFT:
-				this.x--;
+				x = x - 1;
 			break;
 	
 			case UP:
-				this.y--;
+				y = y - 1;
 			break;
 		default:
 			break;
