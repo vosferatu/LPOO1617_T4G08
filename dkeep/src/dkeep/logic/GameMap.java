@@ -58,12 +58,10 @@ public class GameMap {
 
 	/**
 	 * creates a new game map
-	 * @param map2 char matrix
+	 * @param map char matrix
 	 */
-	public GameMap(char[][] map2) {
-		this.map = map2;
-		this.height = map2.length;
-		this.width = map2[0].length;
+	public GameMap(char[][] map) {
+		this.setMap(map);
 	}
 
 
@@ -174,6 +172,8 @@ public class GameMap {
 	 */
 	public void setMap(char[][] map) {
 		this.map = map;
+		this.height = map.length;
+		this.width = map[0].length;
 	}
 	
 	/**

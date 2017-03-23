@@ -56,6 +56,7 @@ public class Game {
 				this.setState(State.LEVEL2);
 				break;
 			default:
+				this.setCurrentLevel(new DungeonLevel(gameMap));
 				break;
 		}	
 	}

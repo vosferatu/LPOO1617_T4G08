@@ -31,6 +31,8 @@ public class DungeonLevel extends Level {
 	 * @param gameMap new map
 	 */
 	public DungeonLevel(GameMap gameMap) {
+		this.setMap(gameMap);
+		
 		for (int i = 0; i < gameMap.getMap().length; i++) {
 			for (int j = 0; j < gameMap.getMap()[i].length; j++){
 				if(gameMap.getMap()[i][j] == 'G' && guard == null){

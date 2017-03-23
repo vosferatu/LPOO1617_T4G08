@@ -1,6 +1,9 @@
 package dkeep.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import dkeep.logic.CellPosition;
@@ -9,15 +12,14 @@ import dkeep.logic.Game;
 import dkeep.logic.GameMap;
 import dkeep.logic.State;
 
+public class TestKeepGameLogic {
 
-public class TestDungeonGameLogic {
-
-	char [][] map = new char [][] 
-					{{'X','X','X','X','X'},
-					{'X','H',' ','G','X'},
-					{'I',' ',' ',' ','X'},
-					{'I','k',' ',' ','X'},
-					{'X','X','X','X','X'}
+		char [][] map = new char [][] 
+				{{'X','X','X','X','X'},
+				{'X','H',' ','G','X'},
+				{'I',' ',' ',' ','X'},
+				{'I','k',' ',' ','X'},
+				{'X','X','X','X','X'}
 	};
 	
 	@Test
@@ -28,7 +30,7 @@ public class TestDungeonGameLogic {
 		game.updateGame(Direction.DOWN);
 		assertEquals(new CellPosition(1,2), game.getHeroPosition());
 	}
-
+	
 	@Test
 	public void testMoveHeroIntoWall() {
 		GameMap gameMap = new GameMap(map);
@@ -88,5 +90,6 @@ public class TestDungeonGameLogic {
 		assertFalse(game.isGameOver());
 		assertEquals(State.LEVEL2, game.getState());
 	}
-	
+
+
 }
