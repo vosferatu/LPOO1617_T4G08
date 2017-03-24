@@ -32,21 +32,21 @@ public class DungeonLevel extends Level {
 	 */
 	public DungeonLevel(GameMap gameMap) {
 		this.setMap(gameMap);
-		
+		//no need to check if more than 1 hero/lever/guard. user doesn't use this
 		for (int i = 0; i < gameMap.getMap().length; i++) {
 			for (int j = 0; j < gameMap.getMap()[i].length; j++){
-				if(gameMap.getMap()[i][j] == 'G' && guard == null){
+				if(gameMap.getMap()[i][j] == 'G'){
 					setGuard(new Guard());
 					guard.setPosition(new CellPosition(j,i));
 					guard.setPersonality(Personality.SIMPLE);
 				}
-				if(gameMap.getMap()[i][j] == 'H' && hero == null){
+				if(gameMap.getMap()[i][j] == 'H'){
 					setHero(new Hero(j,i));
 					hero.setArmed(false);
 					hero.setDead(false);
 					hero.setHasKey(false);
 				}
-				if(gameMap.getMap()[i][j] == 'k' && lever == null){
+				if(gameMap.getMap()[i][j] == 'k'){
 					setLever(new Lever(j,i));
 				}
 				if(gameMap.getMap()[i][j] == 'I'){
