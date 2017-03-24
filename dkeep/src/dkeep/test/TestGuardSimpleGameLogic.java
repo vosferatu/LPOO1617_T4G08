@@ -10,7 +10,7 @@ import dkeep.logic.GameMap;
 import dkeep.logic.State;
 
 
-public class TestDungeonGameLogic {
+public class TestGuardSimpleGameLogic {
 
 	char [][] map = new char [][] 
 					{{'X','X','X','X','X'},
@@ -46,6 +46,19 @@ public class TestDungeonGameLogic {
 		game.updateGame(Direction.RIGHT);
 		assertTrue(game.isGameOver());
 		assertEquals(State.DEFEAT, game.getState());
+	}	
+	
+	@Test
+	public void testHeroMoveDiagonal() {
+		GameMap gameMap = new GameMap(map);
+		Game game = new Game(gameMap);
+		assertFalse(game.isGameOver());
+		game.updateGame(Direction.DOWN);
+		assertFalse(game.isGameOver());
+		game.updateGame(Direction.RIGHT);
+		assertFalse(game.isGameOver());		
+		assertEquals(State.LEVEL1, game.getState());
+		assertEquals(new CellPosition(2,2), game.getHeroPosition());
 	}	
 	
 	@Test

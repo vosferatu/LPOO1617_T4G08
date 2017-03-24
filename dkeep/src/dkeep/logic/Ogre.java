@@ -67,6 +67,9 @@ public class Ogre extends Character {
 		
 		this.setPosition(update);
 		
+		if(club == null)
+			return;
+		
 		CellPosition nova = new CellPosition(); //club position
 		nova.setPosition(position.getAdjacent()); //adjacent position to move into
 		boolean finish = false;

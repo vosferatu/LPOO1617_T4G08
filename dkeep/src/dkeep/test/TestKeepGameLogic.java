@@ -16,9 +16,9 @@ public class TestKeepGameLogic {
 
 		char [][] map = new char [][] 
 				{{'X','X','X','X','X'},
-				{'X','H',' ','G','X'},
+				{'X','H',' ','O','X'},
 				{'I',' ',' ',' ','X'},
-				{'I','k',' ',' ','X'},
+				{'X','k',' ',' ','X'},
 				{'X','X','X','X','X'}
 	};
 	
