@@ -109,6 +109,9 @@ public class TestGuardRookieGameLogic {
 		assertEquals(new CellPosition(1,7), game.getHeroPosition()); //keep level position
 		assertFalse(game.isGameOver());
 		assertEquals(State.LEVEL2, game.getState());
+		game.updateGame(Direction.RIGHT); game.updateGame(Direction.RIGHT); 
+		assertFalse(game.isGameOver());
+		
 	}
 	
 	@Test

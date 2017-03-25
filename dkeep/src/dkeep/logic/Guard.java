@@ -88,8 +88,6 @@ public class Guard extends Character{
 	 * updates the guard's position, influenced by personality
 	 */
 	public void nextMove(){
-		Random rand = new Random(System.currentTimeMillis());
-		int randomN = 0;
 		
 		if(this.personality == Personality.SIMPLE)
 			return;
@@ -104,78 +102,97 @@ public class Guard extends Character{
 
 
 		if(this.personality == Personality.DRUNKEN){
-			
-			if(isAsleep() == true){
-				randomN = rand.nextInt(2);
-				if(randomN == 0){
-					this.wakeUp(); //wakes up 1/2 of the time
-					
-					randomN = rand.nextInt(2);
-					if(randomN == 0){//changes direction 1/2 of the time
-						this.changeDirection();
-						if(direction == Direction.LEFT){
-							moveNum--;
-						} else {
-							moveNum++;
-						}
-					}
-				}
-
-				return;	//doesn't move
-			}
-			else{ //is awake
-
-				randomN = rand.nextInt(4);//goes asleep 1/4 of the time
-				if(randomN == 2){
-					this.setAsleep(true);
-					return; //doesn't move
-				}
-			}
-
-			if(moveNum < 0)
-				moveNum = 23;
-
-			if(moveNum > 23)
-				moveNum = 0;
-			
-			//moves
-			this.setPosition(this.moves[moveNum]);
-			
-			if(direction == Direction.LEFT){
-				moveNum--;
-			} else {
-				moveNum++;
-			}
+			this.moveDrinking();
 		} 
 
 
 		if(this.personality == Personality.SUSPICIOUS){
-
-			if(lastCheck > 5){
-				randomN = rand.nextInt(3);
-				if(randomN == 0){
-					lastCheck = 0;
-					this.changeDirection();					
-				}
-
-			} else {
-				lastCheck++;
-			}
-
-			this.setPosition(this.moves[moveNum]);
-			if(direction == Direction.LEFT){
-				moveNum--;
-			} else {
-				moveNum++;
-			}
-
-			if(moveNum < 0)
-				moveNum = 23;
-
-			if(moveNum > 23)
-				moveNum = 0;
+			this.moveSuspiciously();
 		}
 
+	}
+
+	/**
+	 * updates guard's move with drunken personality
+	 */
+	public void moveDrinking(){
+		Random rand = new Random(System.currentTimeMillis());
+		int randomN = 0;
+		
+		if(isAsleep() == true){
+			randomN = rand.nextInt(2);
+			if(randomN == 0){
+				this.wakeUp(); //wakes up 1/2 of the time
+				
+				randomN = rand.nextInt(2);
+				if(randomN == 0){//changes direction 1/2 of the time
+					this.changeDirection();
+					if(direction == Direction.LEFT){
+						moveNum--;
+					} else {
+						moveNum++;
+					}
+				}
+			}
+
+			return;	//doesn't move
+		}
+		else{ //is awake
+
+			randomN = rand.nextInt(4);//goes asleep 1/4 of the time
+			if(randomN == 2){
+				this.setAsleep(true);
+				return; //doesn't move
+			}
+		}
+
+		if(moveNum < 0)
+			moveNum = 23;
+
+		if(moveNum > 23)
+			moveNum = 0;
+		
+		//moves
+		this.setPosition(this.moves[moveNum]);
+		
+		if(direction == Direction.LEFT){
+			moveNum--;
+		} else {
+			moveNum++;
+		}
+	}
+	
+	/**
+	 * updates guard's move with suspicious personality
+	 */
+	private void moveSuspiciously() {
+		Random rand = new Random(System.currentTimeMillis());
+		int randomN = 0;
+		
+		if(lastCheck > 5){
+			randomN = rand.nextInt(3);
+			if(randomN == 0){
+				lastCheck = 0;
+				this.changeDirection();					
+			}
+
+		} else {
+			lastCheck++;
+		}
+
+		this.setPosition(this.moves[moveNum]);
+		if(direction == Direction.LEFT){
+			moveNum--;
+		} else {
+			moveNum++;
+		}
+
+		if(moveNum < 0)
+			moveNum = 23;
+
+		if(moveNum > 23)
+			moveNum = 0;
+		
 	}
 
 	/**

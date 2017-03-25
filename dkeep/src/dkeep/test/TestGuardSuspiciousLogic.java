@@ -36,7 +36,7 @@ public class TestGuardSuspiciousLogic {
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
 	}
 	
-	@Test(timeout = 10000)
+	@Test(timeout = 100000)
 	public void testHeroIsCapturedByGuard() {
 		DungeonLevel level = new DungeonLevel(Personality.SUSPICIOUS);
 		
@@ -79,4 +79,37 @@ public class TestGuardSuspiciousLogic {
 		assertEquals(new CellPosition(3,1), game.getHeroPosition());
 	}
 	
+	@Test(timeout=100000)
+	public void testGuardGoesBack() {
+		DungeonLevel level = new DungeonLevel(Personality.DRUNKEN);
+		
+		level.updateGame(Direction.RIGHT); level.updateGame(Direction.RIGHT);
+		level.updateGame(Direction.DOWN); level.updateGame(Direction.DOWN);
+		
+		boolean changed = false;
+		//waits for guard to go back
+		int x = 0;
+		while(true){
+			
+			if(level.getGuard().getLastCheck() == 0){
+				changed = true;
+				break;
+			}
+				
+			
+			
+			if(x == 0){
+				level.updateGame(Direction.UP);
+				x++;
+			}
+			else {
+				level.updateGame(Direction.DOWN);
+				x--;
+			}
+			
+		}
+		
+		assertFalse(level.isHeroDead());
+		assertTrue(changed);
+	}	
 }

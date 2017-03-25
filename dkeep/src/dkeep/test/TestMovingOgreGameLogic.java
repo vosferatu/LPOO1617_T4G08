@@ -37,7 +37,7 @@ public class TestMovingOgreGameLogic {
 		assertEquals(new CellPosition(1,7), game.getHeroPosition());
 	}
 	
-	@Test (timeout = 10000)
+	@Test (timeout = 100000)
 	public void testHeroIsCapturedByOgre() {
 		KeepLevel level = new KeepLevel(5);
 		level.getHero().setArmed(false);//takes weapon from hero for easier testing
@@ -68,7 +68,7 @@ public class TestMovingOgreGameLogic {
 	}	
 	
 
-	@Test(timeout = 10000)
+	@Test(timeout = 100000)
 	public void testOgreHittingKey() {
 		KeepLevel game = new KeepLevel(5);
 		game.getHero().setArmed(false);//takes weapon from hero

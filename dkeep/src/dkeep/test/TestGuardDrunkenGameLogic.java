@@ -36,7 +36,7 @@ public class TestGuardDrunkenGameLogic {
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
 	}
 	
-	@Test(timeout = 10000)
+	@Test(timeout = 100000)
 	public void testHeroIsCapturedByGuard() {
 		DungeonLevel level = new DungeonLevel(Personality.DRUNKEN);
 		
@@ -46,17 +46,6 @@ public class TestGuardDrunkenGameLogic {
 		level.updateGame(Direction.DOWN);
 		int x = 0;
 		while(!level.isHeroDead()){
-			if(level.getGuard().isAsleep()){
-				String res = level.printMap() + "";
-				boolean found = false;
-			    for (int i = 0; i < res.length(); i++) {
-			        if (res.charAt(i) == 'g') { //checks guard sleeping
-			            found = true;
-			        }
-			    }
-			    
-			    assertTrue(found);
-			}
 			if(x == 0){
 				level.updateGame(Direction.UP);
 				x++;
@@ -91,4 +80,38 @@ public class TestGuardDrunkenGameLogic {
 		assertEquals(new CellPosition(3,1), game.getHeroPosition());
 	}
 	
+	@Test(timeout=100000)
+	public void testGuardGoesToSleep() {
+		DungeonLevel level = new DungeonLevel(Personality.DRUNKEN);
+		
+		level.updateGame(Direction.RIGHT); level.updateGame(Direction.RIGHT);
+		level.updateGame(Direction.DOWN); level.updateGame(Direction.DOWN);
+		int x = 0;
+		while(!level.getGuard().isAsleep()){
+			
+			if(x == 0){
+				level.updateGame(Direction.UP);
+				x++;
+			}
+			else {
+				level.updateGame(Direction.DOWN);
+				x--;
+			}
+			
+		}
+		
+		if(level.getGuard().isAsleep()){
+			String res = level.printMap() + "";
+			boolean found = false;
+		    for (int i = 0; i < res.length(); i++) {
+		        if (res.charAt(i) == 'g') { //checks guard sleeping
+		            found = true;
+		        }
+		    }
+		    
+		    assertTrue(found);
+		}
+		
+		assertFalse(level.isHeroDead());
+	}	
 }
