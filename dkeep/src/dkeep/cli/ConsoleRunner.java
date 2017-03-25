@@ -46,7 +46,7 @@ public class ConsoleRunner {
 		
 		printDungeon(game);
 
-		while (!(gameState == State.DEFEAT  || gameState == State.WON)) {
+		while (!game.isGameOver()) {
 			
 			Direction move = getHeroMove(scanner);
 			

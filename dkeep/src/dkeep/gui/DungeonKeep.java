@@ -1,15 +1,11 @@
 package dkeep.gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import dkeep.logic.Direction;
 import dkeep.logic.Game;
-import dkeep.logic.KeepLevel;
 import dkeep.logic.Personality;
-import dkeep.logic.State;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,13 +16,14 @@ import java.awt.Font;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
-import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
+
 
 public class DungeonKeep {
 
 	private Game game;
-	private JFrame frame;
+	private JFrame frmDungeonKeep;
 	private JLabel gameStatus;
 	private JLabel lblNumberOfOgres;
 	private JLabel lblGuardPersonality;
@@ -41,27 +38,6 @@ public class DungeonKeep {
 	private JSlider slider;
 	private int ogreCount = 1;
 	private Personality personality = Personality.SIMPLE;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DungeonKeep window = new DungeonKeep();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -74,18 +50,22 @@ public class DungeonKeep {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 568, 472);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmDungeonKeep = new JFrame();
+		frmDungeonKeep.setTitle("Dungeon Keep");
+		frmDungeonKeep.setForeground(Color.BLACK);
+		frmDungeonKeep.setFont(new Font("Yu Gothic", Font.PLAIN, 20));
+		frmDungeonKeep.setBackground(Color.DARK_GRAY);
+		frmDungeonKeep.setBounds(100, 100, 703, 542);
+		frmDungeonKeep.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDungeonKeep.getContentPane().setLayout(null);
 		
 		lblNumberOfOgres = new JLabel("Number of Ogres");
 		lblNumberOfOgres.setBounds(17, 18, 109, 14);
-		frame.getContentPane().add(lblNumberOfOgres);
+		frmDungeonKeep.getContentPane().add(lblNumberOfOgres);
 		
 		lblGuardPersonality = new JLabel("Guard personality");
-		lblGuardPersonality.setBounds(17, 53, 109, 14);
-		frame.getContentPane().add(lblGuardPersonality);
+		lblGuardPersonality.setBounds(17, 72, 109, 14);
+		frmDungeonKeep.getContentPane().add(lblGuardPersonality);
 		
 		btnNewGame = new JButton("New Game");
 		btnNewGame.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -95,59 +75,37 @@ public class DungeonKeep {
 				game.setOgreCount(ogreCount);
 				String gameText = game + "";
 				textArea.setText(gameText);
-				gameStatus.setText("Level 1 - Escape the guard!");
+				updateLabel(gameStatus);
 				btnUp.setEnabled(true);
 				btnDown.setEnabled(true);
 				btnLeft.setEnabled(true);
 				btnRight.setEnabled(true);
 			}
 		});
-		btnNewGame.setBounds(395, 18, 109, 33);
-		frame.getContentPane().add(btnNewGame);
+		btnNewGame.setBounds(500, 18, 109, 33);
+		frmDungeonKeep.getContentPane().add(btnNewGame);
 		
 		btnUp = new JButton("Up");
 		btnUp.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnUp.setEnabled(false);
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(game != null)
-					textArea.setText(game.toString());
-				if(game.getCurrentLevel().updateGame(Direction.UP)) {
-					if(game.getCurrentLevel().isHeroDead()) {
-						gameStatus.setText("You Lost");
-					} else if(game.getState() == State.LEVEL2) {
-						gameStatus.setText("Level 2 - Oh no, a wild ogre appears...");
-						game.setCurrentLevel(new KeepLevel(ogreCount));
-					} else {
-						gameStatus.setText("You Won!");
-					}
-				}
+				updateGame(Direction.UP);
 			}
 		});
-		btnUp.setBounds(413, 181, 71, 20);
-		frame.getContentPane().add(btnUp);
+		btnUp.setBounds(520, 230, 71, 20);
+		frmDungeonKeep.getContentPane().add(btnUp);
 		
 		btnRight = new JButton("Right");
 		btnRight.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnRight.setEnabled(false);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(game != null)
-					textArea.setText(game.toString());
-				if(game.getCurrentLevel().updateGame(Direction.RIGHT)) {
-					if(game.getCurrentLevel().isHeroDead()) {
-						gameStatus.setText("You Lost");
-					} else if(game.getState() == State.LEVEL2) {
-						gameStatus.setText("Level 2 - Oh no, a wild ogre appears...");
-						game.setCurrentLevel(new KeepLevel(ogreCount));
-					} else {
-						gameStatus.setText("You Won!");
-					}
-				}
+				updateGame(Direction.RIGHT);
 			}
 		});
-		btnRight.setBounds(453, 206, 71, 20);
-		frame.getContentPane().add(btnRight);
+		btnRight.setBounds(566, 262, 71, 20);
+		frmDungeonKeep.getContentPane().add(btnRight);
 		
 		comboBox = new JComboBox<Personality>();
 		comboBox.addActionListener(new ActionListener() {
@@ -157,52 +115,30 @@ public class DungeonKeep {
 		});
 		comboBox.setModel(new DefaultComboBoxModel<Personality>(Personality.values()));
 		comboBox.setMaximumRowCount(5);
-		comboBox.setBounds(123, 50, 109, 20);
-		frame.getContentPane().add(comboBox);
+		comboBox.setBounds(123, 72, 109, 20);
+		frmDungeonKeep.getContentPane().add(comboBox);
 		
 		btnLeft = new JButton("Left");
 		btnLeft.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnLeft.setEnabled(false);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(game != null)
-					textArea.setText(game.toString());
-				if(game.getCurrentLevel().updateGame(Direction.LEFT)) {
-					if(game.getCurrentLevel().isHeroDead()) {
-						gameStatus.setText("You Lost");
-					} else if(game.getState() == State.LEVEL2) {
-						gameStatus.setText("Level 2 - Oh no, a wild ogre appears...");
-						game.setCurrentLevel(new KeepLevel(ogreCount));
-					} else {
-						gameStatus.setText("You Won!");
-					}
-				}
+				updateGame(Direction.LEFT);
 			}
 		});
-		btnLeft.setBounds(372, 206, 71, 20);
-		frame.getContentPane().add(btnLeft);
+		btnLeft.setBounds(467, 262, 71, 20);
+		frmDungeonKeep.getContentPane().add(btnLeft);
 		
 		btnDown = new JButton("Down");
 		btnDown.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnDown.setEnabled(false);
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(game != null)
-					textArea.setText(game.toString());
-				if(game.getCurrentLevel().updateGame(Direction.DOWN)) {
-					if(game.getCurrentLevel().isHeroDead()) {
-						gameStatus.setText("You Lost");
-					} else if(game.getState() == State.LEVEL2) {
-						gameStatus.setText("Level 2 - Oh no, a wild ogre appears...");
-						game.setCurrentLevel(new KeepLevel(ogreCount));
-					} else {
-						gameStatus.setText("You Won!");
-					}
-				}
+				updateGame(Direction.DOWN);
 			}
 		});
-		btnDown.setBounds(413, 230, 71, 20);
-		frame.getContentPane().add(btnDown);
+		btnDown.setBounds(520, 296, 71, 20);
+		frmDungeonKeep.getContentPane().add(btnDown);
 		
 		btnExitGame = new JButton("Exit");
 		btnExitGame.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -211,17 +147,17 @@ public class DungeonKeep {
 				System.exit(0);
 			}
 		});
-		btnExitGame.setBounds(402, 327, 89, 23);
-		frame.getContentPane().add(btnExitGame);
+		btnExitGame.setBounds(520, 431, 89, 23);
+		frmDungeonKeep.getContentPane().add(btnExitGame);
 		
 		textArea = new JTextArea();
 		textArea.setFont(new Font("Courier New", Font.PLAIN, 16));
-		textArea.setBounds(17, 82, 324, 268);
-		frame.getContentPane().add(textArea);
+		textArea.setBounds(39, 129, 324, 268);
+		frmDungeonKeep.getContentPane().add(textArea);
 		
 		gameStatus = new JLabel("You can start a new game");
-		gameStatus.setBounds(17, 367, 324, 14);
-		frame.getContentPane().add(gameStatus);
+		gameStatus.setBounds(17, 460, 324, 14);
+		frmDungeonKeep.getContentPane().add(gameStatus);
 		
 		slider = new JSlider();
 		slider.setFont(new Font("Dialog", Font.PLAIN, 10));
@@ -239,8 +175,8 @@ public class DungeonKeep {
 		slider.setPaintTicks(true);
 		slider.setMinimum(1);
 		slider.setMaximum(5);
-		slider.setBounds(123, 2, 147, 39);
-		frame.getContentPane().add(slider);
+		slider.setBounds(124, 18, 147, 39);
+		frmDungeonKeep.getContentPane().add(slider);
 	}
 
 	public Game getGame() {
@@ -250,4 +186,59 @@ public class DungeonKeep {
 	public void setGame(Game game) {
 		this.game = game;
 	}
+	
+	public void updateGame(Direction move){
+		game.updateGame(move); //check why doens't print last frame
+		if(game != null){
+			textArea.setText(game.toString());
+			this.updateLabel(gameStatus);
+		}
+		
+		if(game.isGameOver()){
+			btnUp.setEnabled(false);
+			btnDown.setEnabled(false);
+			btnLeft.setEnabled(false);
+			btnRight.setEnabled(false);
+			
+			textArea.setText(game.toString());
+			this.updateLabel(gameStatus);
+			
+			game = null;
+		}
+	}
+	
+	public void updateLabel(JLabel status){
+		if(game == null){
+			status.setText("You can start a new game.");
+			return;
+		}
+		
+		switch(game.getState()){
+		case DEFEAT:
+			status.setText("YOU LOST!");
+			break;
+		case WON:
+			status.setText("YOU WON!");
+			break;
+		case LEVEL1:
+			status.setText("Escape the Dungeon Keeper...");
+			break;
+		case LEVEL2:
+			status.setText("Oh no! Now you have to deal with the Keep's horde of Crazy Ogres...");
+			break;
+			default:
+				status.setText("You can start a new game.");
+			break;
+		}
+		
+	}
+
+	public void run() {
+		try {
+			this.frmDungeonKeep.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+		
 }
