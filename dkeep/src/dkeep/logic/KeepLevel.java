@@ -154,35 +154,35 @@ public class KeepLevel extends Level {
 	 * @see dkeep.logic.GameLogic#printMap()
 	 */
 	@Override
-	public String printMap() {
-		String res = "";
+	public char[][] printMap() {
+		char[][] res = new char[map.getMap().length][map.getMap()[0].length];
 
 		for (int i = 0; i < map.getMap().length; i++) {
 			for (int j = 0; j < map.getMap()[i].length; j++) {
 				boolean noChar = true;
 
 				if (hero.isAt(j, i)) {
-					res += hero;
+					res[i][j] = hero.getId();
 					noChar = false;
 				} else {
 					for (Ogre x : ogres) {
 						if (x.getClub() != null && x.getClub().getPosition().isAt(j, i)) {
 							if (lever != null && lever.getPosition().isAt(j, i)) {
-								res += "$";
+								res[i][j] = '$';
 								noChar = false;
 								break;
 							} else {
-								res += x.getClub();
+								res[i][j] = x.getClub().getId();
 								noChar = false;
 								break;
 							}
 						} else if (x.isAt(j, i)) {
 							if (lever != null && lever.getPosition().isAt(j, i)) {
-								res += "$";
+								res[i][j] = '$';
 								noChar = false;
 								break;
 							} else {
-								res += x;
+								res[i][j] = x.getId();
 								noChar = false;
 								break;
 							}
@@ -191,23 +191,19 @@ public class KeepLevel extends Level {
 				}
 				if (noChar) {
 					if (lever != null && lever.getPosition().isAt(j, i)) {
-						res += lever;
+						res[i][j] = lever.getId();
 					} else {
 						for (Door door : doors) {
 							if(door.getPosition().isAt(j,i)){
-								res += door;
+								res[i][j] = door.getId();
 								noChar = false;
 							}
 						}
 						if(noChar)
-							res += map.getMap()[i][j];
+							res[i][j] = map.getMap()[i][j];
 					}
 				}
-				res += " ";
 			}
-			if(i != (map.getMap().length-1))
-				res += "\n";
-
 		}
 		return res;
 	}

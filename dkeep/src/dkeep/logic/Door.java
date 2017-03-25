@@ -67,7 +67,9 @@ public class Door {
 	 * @return id
 	 */
 	public char getId() {
-		return id;
+		if(isOpen())
+			return 'S';
+		else return id;
 	}
 
 	/**

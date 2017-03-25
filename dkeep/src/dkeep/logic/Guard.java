@@ -224,6 +224,12 @@ public class Guard extends Character{
 		return res;
 	}
 
+	@Override
+	public char getId(){
+		if(isAsleep())
+			return 'g';
+		else return id;
+	}
 	/**
 	 * checks if guard is asleep
 	 * @return true if asleep, false otherwise

@@ -23,7 +23,7 @@ public interface GameLogic {
 	 * prints a map in a string
 	 * @return string representing a map
 	 */
-	String printMap();
+	char[][] printMap();
 	
 	/**
 	 * gets the level's hero position

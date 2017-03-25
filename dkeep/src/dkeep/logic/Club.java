@@ -49,6 +49,13 @@ public class Club {
 	}
 
 	/**
+	 * gets current id
+	 * @return id
+	 */
+	public char getId(){
+		return id;
+	}
+	/**
 	 * @return id in string
 	 */
 	@Override

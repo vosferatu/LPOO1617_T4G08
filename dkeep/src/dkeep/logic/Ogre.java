@@ -161,4 +161,11 @@ public class Ogre extends Character {
 		return false;
 	}
 	
+	@Override
+	public char getId(){
+		if(getStun() > 0){
+			return '8';
+		}
+		else return id;
+	}
 }

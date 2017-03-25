@@ -150,32 +150,29 @@ public class DungeonLevel extends Level {
 	 * @see dkeep.logic.GameLogic#printMap()
 	 */
 	@Override
-	public String printMap() {
-		String res = "";
+	public char[][] printMap() {
+		char[][] res = new char[map.getMap().length][map.getMap()[0].length];
 		
 		for (int i = 0; i < map.getMap().length; i++) {
 			for(int j = 0; j < map.getMap()[i].length; j++){
 				boolean noChar = true;
 				
 				if(hero.isAt(j, i) || (hero.isAt(j, i) && lever.getPosition().isAt(j, i))){
-					res += hero; noChar = false;
+					res[i][j] = hero.getId(); noChar = false;
 				}
 				
 				if(lever.getPosition().isAt(j, i) && !hero.isAt(j, i)){
-					res += lever; noChar = false;
+					res[i][j] = lever.getId(); noChar = false;
 				}
 				
 				if(guard.isAt(j, i)){
-					res += guard; noChar = false;
+					res[i][j] = guard.getId(); noChar = false;
 				}
 				
 				if(noChar)
-					res += map.getMap()[i][j];
+					res[i][j] = map.getMap()[i][j];
 				
-				res += " ";
 			}
-			if(i != (map.getMap().length-1))
-				res += "\n";
 		}
 		return res;
 	}

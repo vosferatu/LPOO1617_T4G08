@@ -157,4 +157,14 @@ public class Hero extends Character {
 		else return false;
 	}
 	
+	@Override
+	public char getId(){
+		if(hasKey() && isArmed())
+			return 'K';
+		
+		if(!isArmed())
+			return id;
+		else return 'A';
+	}
+	
 }

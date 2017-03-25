@@ -110,8 +110,17 @@ public class Game {
 	 */
 	@Override
 	public String toString() {
-		String res = "\n";
-		res += currentLevel.printMap();
+		String res = "";
+		char[][] mapa = currentLevel.printMap();
+		
+		for (int i = 0; i < mapa.length; i++) {
+			for (int j = 0; j < mapa[0].length; j++) {
+				res+= mapa[i][j];
+				res += " ";
+			}
+			if(i != (mapa.length-1))
+				res += "\n";
+		}
 		return res;
 	}
 
