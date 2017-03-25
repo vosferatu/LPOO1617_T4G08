@@ -139,7 +139,7 @@ public class Guard extends Character{
 		}
 		else{ //is awake
 
-			randomN = rand.nextInt(4);//goes asleep 1/4 of the time
+			randomN = rand.nextInt(3);//goes asleep 1/4 of the time
 			if(randomN == 2){
 				this.setAsleep(true);
 				return; //doesn't move
