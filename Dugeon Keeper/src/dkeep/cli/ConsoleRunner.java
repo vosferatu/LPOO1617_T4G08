@@ -36,11 +36,13 @@ public class ConsoleRunner {
 	
 	private static void startDungeon(Scanner scanner) {
 		
-		game = new Game();
+		game = new Game(guardPreferences(scanner, game)); //passes the personality of the guard
+		
+		//gets the number of ogres
+		int ogreCount = userInput(scanner, "\nPlease enter the number of ogres", 1, 5);
+		game.setOgreCount(ogreCount);
 		
 		State gameState = game.getState();
-		
-		gamePreferences(scanner, game);
 		
 		printDungeon(game);
 
@@ -65,27 +67,26 @@ public class ConsoleRunner {
 		}
 	}
 	
-	private static void gamePreferences(Scanner scanner, Game game){
+	private static Personality guardPreferences(Scanner scanner, Game game){
 		
 		int input = userInput(scanner, "\nGuard Personality:\n 1. Rookie\n 2. Drunken\n 3. Suspicious\n 4. Simple\nOption?", 1, 4);
-		
+		Personality person = Personality.SIMPLE;
 
 		switch (input) {
 		case 1:
-			game.setGuard(Personality.ROOKIE);
+			person = Personality.ROOKIE;
 			break;
 		case 2:
-			game.setGuard(Personality.DRUNKEN);
+			person = Personality.DRUNKEN;
 			break;
 		case 3:
-			game.setGuard(Personality.SUSPICIOUS);
+			person = Personality.SUSPICIOUS;
 			break;
 		default:
 			break;
 		}
 		
-		int ogreCount = userInput(scanner, "\nPlease enter the number of ogres", 1, 5);
-		game.setOgres(ogreCount);
+		return person;
 	}
 
 	private static int userInput(Scanner scanner, String prompt,
@@ -111,7 +112,7 @@ public class ConsoleRunner {
 	}
 	
 	private static void printDungeon(Game game) {
-		System.out.println(game);
+		System.out.println(game + "\n");
 	}
 
 	private static Direction getHeroMove(Scanner scanner) {

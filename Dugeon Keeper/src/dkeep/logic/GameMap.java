@@ -1,10 +1,27 @@
 package dkeep.logic;
 
+/**
+ * @author João Mendes
+ *	class to represent the game map
+ */
 public class GameMap {
+	/**
+	 * represents the game map in characters
+	 */
 	public char [][] map = null;
+	/**
+	 * represents the game's width 
+	 */
 	private int width;
+	/**
+	 * represents the game's height
+	 */
 	private int height;
 
+	/**
+	 * creates a new game map according to the level
+	 * @param level of the map
+	 */
 	public GameMap(Level level){
 		
 		if(level instanceof DungeonLevel){
@@ -39,13 +56,18 @@ public class GameMap {
 	}
 	
 
-	public GameMap(char[][] map2) {
-		this.map = map2;
-		this.height = map2.length;
-		this.width = map2[0].length;
+	/**
+	 * creates a new game map
+	 * @param map char matrix
+	 */
+	public GameMap(char[][] map) {
+		this.setMap(map);
 	}
 
 
+	/**
+	 * converts the map to a string
+	 */
 	@Override
 	public String toString() {
 		String mapa = "\n";
@@ -60,6 +82,12 @@ public class GameMap {
 		return mapa;
 	}
 	
+	/**
+	 * checks if the her0's move is possible
+	 * @param hero hero
+	 * @param move direction
+	 * @return true if possible to move, false otherwise
+	 */
 	public boolean heroMovePossible(Hero hero, Direction move) {
 		int x = hero.getPosition().getX();
 		int y = hero.getPosition().getY();
@@ -81,46 +109,76 @@ public class GameMap {
 					return (map[y][x - 1] != 'X');
 			break;
 
-		case UP:
-			if (map[y - 1][x] != 'I')
-				return (map[y - 1][x] != 'X');
+			case UP:
+				if (map[y - 1][x] != 'I')
+					return (map[y - 1][x] != 'X');
 			break;
 		default:
 			break;
 		}
+		return false;
 		
-		if (hero.hasKey())
+		/*if (hero.hasKey())
 			return true;
 		else
-			return false;
+			return false;*/
 	}
 	
+	/**
+	 * gets the map's width
+	 * @return width
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * sets the map's width
+	 * @param width new width
+	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
+	/**
+	 * gets the map's height
+	 * @return height
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * sets the map's height
+	 * @param height new height
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
 
 
+	/**
+	 * gets the current map
+	 * @return map
+	 */
 	public char[][] getMap() {
 		return map;
 	}
 
 
+	/**
+	 * sets the current map
+	 * @param map new map
+	 */
 	public void setMap(char[][] map) {
 		this.map = map;
+		this.height = map.length;
+		this.width = map[0].length;
 	}
 	
+	/**
+	 * opens map's doors. changes 'I's to 'S's
+	 */
 	public void openDoors(){
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++){
@@ -129,5 +187,20 @@ public class GameMap {
 			}
 		}
 	}
+
+	/**
+	 * opens a specific door in the map
+	 * @param door door to be open
+	 */
+	public void openDoor(Door door) {
+		int xpos = door.getPosition().getX();
+		int ypos = door.getPosition().getY();
+		
+		if(xpos > width - 1) return;
+		if(ypos > height - 1) return;
 	
+		if(map[ypos][xpos] == 'I')
+			map[ypos][xpos] = 'S';
+		
+	}
 }
