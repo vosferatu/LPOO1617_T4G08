@@ -14,18 +14,6 @@ public abstract class Character {
 	 * representation
 	 */
 	protected char id;
-	/**
-	 * type of the character
-	 */
-	protected Type type;
-	
-	/**
-	 * @author João Mendes
-	 *	types of characters
-	 */
-	public enum Type {
-		HERO, OGRE, GUARD
-	}
 	
 	/**
 	 * checks if a character is adjacent to other character
@@ -42,7 +30,7 @@ public abstract class Character {
 	 * @return true if a character is at a certain position, false otherwise
 	 */
 	public boolean isAt(CellPosition esta) {
-		return (this.equals(esta));
+		return (this.position.equals(esta));
 	}
 	
 	/**
@@ -87,19 +75,4 @@ public abstract class Character {
 		this.id = id;
 	}
 	
-	/**
-	 * gets the current type
-	 * @return type
-	 */
-	public Type getType() {
-		return type;
-	}
-
-	/**
-	 * sets the current type
-	 * @param type new type
-	 */
-	public void setType(Type type) {
-		this.type = type;
-	}
 }

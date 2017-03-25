@@ -24,6 +24,10 @@ public class TestGuardSimpleGameLogic {
 	public void testMoveHeroIntoFreeCell() {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
+		game.setOgreCount(1);
+		
+		assertEquals(1, game.getOgreCount());
+		
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
 		game.updateGame(Direction.DOWN);
 		assertEquals(new CellPosition(1,2), game.getHeroPosition());
@@ -33,6 +37,10 @@ public class TestGuardSimpleGameLogic {
 	public void testMoveHeroIntoWall() {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
+		game.setOgreCount(1);
+		
+		assertEquals(1, game.getOgreCount());
+		
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
 		game.updateGame(Direction.UP);
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
@@ -42,6 +50,10 @@ public class TestGuardSimpleGameLogic {
 	public void testHeroIsCapturedByGuard() {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
+		game.setOgreCount(1);
+		
+		assertEquals(1, game.getOgreCount());
+		
 		assertFalse(game.isGameOver());
 		game.updateGame(Direction.RIGHT);
 		assertTrue(game.isGameOver());
@@ -52,6 +64,10 @@ public class TestGuardSimpleGameLogic {
 	public void testHeroMoveDiagonal() {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
+		game.setOgreCount(1);
+		
+		assertEquals(1, game.getOgreCount());
+		
 		assertFalse(game.isGameOver());
 		game.updateGame(Direction.DOWN);
 		assertFalse(game.isGameOver());
@@ -65,6 +81,10 @@ public class TestGuardSimpleGameLogic {
 	public void testMoveHeroIntoClosedDoor() {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
+		game.setOgreCount(1);
+		
+		assertEquals(1, game.getOgreCount());
+		
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
 		game.updateGame(Direction.DOWN);
 		assertEquals(new CellPosition(1,2), game.getHeroPosition());
@@ -76,6 +96,10 @@ public class TestGuardSimpleGameLogic {
 	public void testMoveHeroIntoLever() {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
+		game.setOgreCount(1);
+		
+		assertEquals(1, game.getOgreCount());
+		
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
 		game.updateGame(Direction.DOWN);
 		assertEquals(new CellPosition(1,2), game.getHeroPosition());
@@ -89,6 +113,10 @@ public class TestGuardSimpleGameLogic {
 	public void testMoveHeroIntoNextLevel() {
 		GameMap gameMap = new GameMap(map);
 		Game game = new Game(gameMap);
+		game.setOgreCount(1);
+		
+		assertEquals(1, game.getOgreCount());
+		
 		assertEquals(new CellPosition(1,1), game.getHeroPosition());
 		game.updateGame(Direction.DOWN);
 		assertEquals(new CellPosition(1,2), game.getHeroPosition());

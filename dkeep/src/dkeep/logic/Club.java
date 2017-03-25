@@ -41,14 +41,6 @@ public class Club {
 	}
 
 	/**
-	 * gets current id
-	 * @return id
-	 */
-	public char getId() {
-		return id;
-	}
-
-	/**
 	 * sets current id
 	 * @param id new id
 	 */

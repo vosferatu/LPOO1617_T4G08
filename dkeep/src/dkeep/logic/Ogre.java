@@ -27,7 +27,6 @@ public class Ogre extends Character {
 	public Ogre(int x, int y) {
 		this.id = 'O';
 		this.position = new CellPosition(x,y);
-		this.type = Type.OGRE;
 		this.club = new Club(this);
 	}
 
@@ -37,7 +36,6 @@ public class Ogre extends Character {
 	public Ogre() {
 		this.id = 'O';
 		this.position = new CellPosition(4,4);
-		this.type = Type.OGRE;
 		this.club = new Club(this);
 	}
 
@@ -50,6 +48,9 @@ public class Ogre extends Character {
 			stun--;
 			return;
 		}
+		
+		if(club == null) //for unit testing
+			return;
 		
 		CellPosition update = new CellPosition(); //ogre position
 		update.setPosition(position.getAdjacent()); //adjacent position to move into
@@ -102,12 +103,6 @@ public class Ogre extends Character {
 	 */
 	public void setAtKey(Lever key) {
 		atKey = this.position.equals(key.getPosition());
-		
-		/*
-		 * if(atKey == true){
-		 * 		this.setId('$')
-		 * }
-		 */
 	}
 
 	/**

@@ -25,6 +25,10 @@ public interface GameLogic {
 	 */
 	String printMap();
 	
+	/**
+	 * gets the level's hero position
+	 * @return hero's position
+	 */
 	CellPosition getHeroPosition();
 	
 }

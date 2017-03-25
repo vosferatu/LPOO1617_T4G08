@@ -27,7 +27,6 @@ public class Hero extends Character {
 	public Hero(int x, int y){
 		this.id = 'H';
 		this.position = new CellPosition(x,y);
-		this.type = Type.HERO;
 	}
 	
 	/**
@@ -36,7 +35,6 @@ public class Hero extends Character {
 	public Hero(){
 		this.id = 'H';
 		this.position = new CellPosition(1,1);
-		this.type = Type.HERO;
 	}
 	
 	/**
@@ -118,7 +116,6 @@ public class Hero extends Character {
 		this.dead = dead;
 	}
 
-	//TODO: change name
 	/**
 	 * checks if hero is at lever position
 	 * @param lever lever

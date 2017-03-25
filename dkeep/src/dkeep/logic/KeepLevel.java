@@ -97,19 +97,19 @@ public class KeepLevel extends Level {
 		
 		//first stun the guards
 		for (Ogre ogre : ogres) {
-			if (hero.isAdjacent(ogre) && (!ogre.isStunned())){
+			if (hero.isAdjacent(ogre) && (!ogre.isStunned()) && hero.isArmed()){
 				ogre.setStun(2);
 			}
 		}
 		
-		//check if hero is going to die be ogre or club
+		//check if hero is going to die by ogre or club
 		for (Ogre ogre : ogres) {
 			if (hero.isAdjacent(ogre) && (!ogre.isStunned())) {
 				hero.setDead(true);
 				done = false;
 			}
 			
-			if(hero.getPosition().isAdjacent(ogre.getClub().getPosition())){
+			if(ogre.getClub() != null && hero.getPosition().isAdjacent(ogre.getClub().getPosition())){
 				hero.setDead(true);
 				done = false;
 			}
@@ -166,7 +166,7 @@ public class KeepLevel extends Level {
 					noChar = false;
 				} else {
 					for (Ogre x : ogres) {
-						if (x.getClub().getPosition().isAt(j, i)) {
+						if (x.getClub() != null && x.getClub().getPosition().isAt(j, i)) {
 							if (lever != null && lever.getPosition().isAt(j, i)) {
 								res += "$";
 								noChar = false;

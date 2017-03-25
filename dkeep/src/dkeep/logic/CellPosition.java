@@ -178,7 +178,7 @@ public class CellPosition {
 		case 3:
 			return new CellPosition(this.x, this.y+1);
 		default:
-			return new CellPosition(this.x, this.y+1);
+			return null;
 		}
 		
 	}

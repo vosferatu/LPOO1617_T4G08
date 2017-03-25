@@ -39,9 +39,8 @@ public class Guard extends Character{
 	public Guard() {
 		this.id = 'G';
 		this.position = new CellPosition(8,1);
-		this.type = Type.GUARD;
 
-		moves = new CellPosition[] {new CellPosition(7,1), new CellPosition(7,2),
+		CellPosition [] one  = new CellPosition[] {new CellPosition(7,1), new CellPosition(7,2),
 				new CellPosition(7,3), (new CellPosition(7,4)), new CellPosition(7,5), 
 				new CellPosition(6,5), new CellPosition(5,5), new CellPosition(4,5),
 				new CellPosition(3,5), new CellPosition(2,5), new CellPosition(1,5),
@@ -50,6 +49,7 @@ public class Guard extends Character{
 				new CellPosition(7,6), new CellPosition(8,6), new CellPosition(8,5),
 				new CellPosition(8,4), new CellPosition(8,3), new CellPosition(8,2),
 				new CellPosition(8,1)};
+		this.setMoves(one);
 	}
 
 	/**
