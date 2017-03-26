@@ -68,7 +68,9 @@ public class DungeonKeep extends JFrame {
 		btnNewGame.setFocusable(false);
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				settings = optionsPanel.getSettings();
+				if(settings.getMap() == null)
+					settings = optionsPanel.getSettings();
+				
 				gamePanel.setEnabled(true);
 				gamePanel.setFocusable(true);
 				gamePanel.requestFocus();
