@@ -55,6 +55,8 @@ public class DungeonKeep extends JFrame {
 		getContentPane().setLayout(null);
 		
 		gamePanel = new GameArea();
+		gamePanel.setFocusTraversalKeysEnabled(false);
+		gamePanel.setBounds(0, 45, 701, 636);
 		getContentPane().add(gamePanel);
 		
 		//---------------------------------------BUTTONS---------------------------------------------------
@@ -63,6 +65,9 @@ public class DungeonKeep extends JFrame {
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				settings = optionsPanel.getSettings();
+				gamePanel.setEnabled(true);
+				gamePanel.setFocusable(true);
+				gamePanel.requestFocus();
 				gamePanel.newGame(settings);
 			}
 		});
