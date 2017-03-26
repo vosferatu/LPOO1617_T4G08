@@ -50,19 +50,20 @@ public class GameArea extends JPanel implements KeyListener {
 	}
 	
 	void loadImages() throws IOException{
-		floor = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\floor.png"));
-		wall = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\wall.png"));
-		exit = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\door_open.png"));
-		hero = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\hero_unarmed.png"));
-		lever = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\lever.png"));
-		key = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\key.png"));
-		guardSleeping = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\guard_sleeping.png"));
-		guard = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\guard.png"));
-		heroArmed = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\hero_armed.png"));
-		heroKey = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\hero_key.png"));
-		ogre = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\ogre.png"));
-		club = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\club.png"));
-		door = ImageIO.read(new File("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\res\\door_closed.png"));
+		floor = ImageIO.read(new File("res/floor.png"));
+		wall = ImageIO.read(new File("res/wall.png"));
+		exit = ImageIO.read(new File("res/door_open.png"));
+		hero = ImageIO.read(new File("res/hero_unarmed.png"));
+		lever = ImageIO.read(new File("res/lever.png"));
+		key = ImageIO.read(new File("res/key.png"));
+		guardSleeping = ImageIO.read(new File("res/guard_sleeping.png"));
+		guard = ImageIO.read(new File("res/guard.png"));
+		heroArmed = ImageIO.read(new File("res/hero_armed.png"));
+		heroKey = ImageIO.read(new File("res/hero_key.png"));
+		ogre = ImageIO.read(new File("res/ogre.png"));
+		club = ImageIO.read(new File("res/club.png"));
+		door = ImageIO.read(new File("res/door_closed.png"));
+		//background = ImageIO.read(new File("res/background.png"));
 		
 		addKeyListener(this);
 	}

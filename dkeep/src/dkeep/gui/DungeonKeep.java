@@ -22,6 +22,7 @@ public class DungeonKeep extends JFrame {
 	private GameArea gamePanel;
 	private GameSettings settings;
 	private GameOptions optionsPanel;
+	
 	private JButton btnNewGame;
 	private JButton btnLevelEditor;
 	private JButton btnExitGame;
@@ -31,37 +32,38 @@ public class DungeonKeep extends JFrame {
 	 * Create the application.
 	 */
 	public DungeonKeep() {
-		initialize();
-		requestFocus();
+		setTitle("DUNGEON KEEP");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("/res/hero_armed.png")); 
+		setBounds(100, 100, 707, 710);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		settings = new GameSettings();
 		optionsPanel = new GameOptions();
 		
+		gamePanel = new GameArea();
+		gamePanel.setFocusTraversalKeysEnabled(false);
+		gamePanel.setBounds(0, 45, 620, 636);
+		getContentPane().add(gamePanel);
+		gamePanel.setFocusable(true);
+		
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(screen.width/2 - this.getSize().width/2, screen.height/2 - this.getSize().height/2);
+	
+		initialize();
+		//requestFocus();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setTitle("DUNGEON KEEP");
-		setForeground(Color.BLACK);
-		setFont(new Font("Yu Gothic", Font.PLAIN, 20));
-		setBackground(Color.DARK_GRAY);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Jo\u00E3o Mendes\\git\\LPOO1617_T4G08\\dkeep\\res\\hero_armed.png")); //TODO:change
-		setBounds(100, 100, 707, 710);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
-		
-		gamePanel = new GameArea();
-		gamePanel.setFocusTraversalKeysEnabled(false);
-		gamePanel.setBounds(0, 45, 701, 636);
-		getContentPane().add(gamePanel);
-		
 		//---------------------------------------BUTTONS---------------------------------------------------
 		btnNewGame = new JButton("New Game");
 		btnNewGame.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewGame.setBounds(0, 624, 193, 30);
+		getContentPane().add(btnNewGame);
+		btnNewGame.setFocusable(false);
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				settings = optionsPanel.getSettings();
@@ -71,37 +73,41 @@ public class DungeonKeep extends JFrame {
 				gamePanel.newGame(settings);
 			}
 		});
-		btnNewGame.setBounds(0, 624, 193, 30);
-		getContentPane().add(btnNewGame);
 		
 		btnLevelEditor = new JButton("Level Editor");
 		btnLevelEditor.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnLevelEditor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		btnLevelEditor.setFocusable(false);
 		btnLevelEditor.setBounds(191, 624, 187, 30);
 		getContentPane().add(btnLevelEditor);
+		btnLevelEditor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//
+			}
+		});
 		
 		btnOptions = new JButton("Options");
 		btnOptions.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnOptions.setBounds(377, 624, 193, 30);
+		btnOptions.setFocusable(false);
+		getContentPane().add(btnOptions);
 		btnOptions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				optionsPanel.setVisible(true);
 			}
 		});
-		btnOptions.setBounds(377, 624, 193, 30);
-		getContentPane().add(btnOptions);
+
 		
 		btnExitGame = new JButton("Exit");
 		btnExitGame.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnExitGame.setBounds(569, 624, 116, 30);
+		btnExitGame.setFocusable(false);
+		getContentPane().add(btnExitGame);
 		btnExitGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnExitGame.setBounds(569, 624, 116, 30);
-		getContentPane().add(btnExitGame);
+		
 	}
 
 	public void run() {
