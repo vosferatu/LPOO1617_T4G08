@@ -89,6 +89,7 @@ public class TestGuardRookieGameLogic {
 		game.updateGame(Direction.DOWN); game.updateGame(Direction.DOWN);
 		game.updateGame(Direction.LEFT); 
 		
+		
 		String res = game.toString() + "";
 		boolean found = false;
 	    for (int i = 0; i < res.length(); i++) {

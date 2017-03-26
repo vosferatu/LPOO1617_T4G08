@@ -101,14 +101,15 @@ public class TestGuardDrunkenGameLogic {
 		}
 		
 		if(level.getGuard().isAsleep()){
-			String res = level.printMap() + "";
+			char[][] res = level.printMap();
 			boolean found = false;
-		    for (int i = 0; i < res.length(); i++) {
-		        if (res.charAt(i) == 'g') { //checks guard sleeping
-		            found = true;
-		        }
+		    for (int i = 0; i < res.length; i++) {
+		    	for (int j = 0; j < res[0].length; j++) {
+			        if (res[i][j] == 'g') { //checks ogre is stunned
+			            found = true;
+			        }
+				}
 		    }
-		    
 		    assertTrue(found);
 		}
 		

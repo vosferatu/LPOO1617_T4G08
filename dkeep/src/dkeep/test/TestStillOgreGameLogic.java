@@ -99,12 +99,14 @@ public class TestStillOgreGameLogic {
 		assertFalse(game.isHeroDead());
 		assertTrue(game.getHero().hasKey());
 		
-		String res = game.printMap();
+		char[][] res = game.printMap();
 		boolean found = false;
-	    for (int i = 0; i < res.length(); i++) {
-	        if (res.charAt(i) == 'K') { //checks is hero has key
-	            found = true;
-	        }
+	    for (int i = 0; i < res.length; i++) {
+	    	for (int j = 0; j < res[0].length; j++) {
+		        if (res[i][j] == 'K') { //checks is hero has key
+		            found = true;
+		        }
+			}
 	    }
 	    
 	    assertTrue(found);
@@ -151,12 +153,14 @@ public class TestStillOgreGameLogic {
 		
 		assertTrue(game.getHero().isArmed());
 		
-		String res1 = game.printMap() + "";
+		char[][] res1 = game.printMap();
 		boolean found1 = false;
-	    for (int i = 0; i < res1.length(); i++) {
-	        if (res1.charAt(i) == 'A') { //checks if hero is armed
-	            found1 = true;
-	        }
+	    for (int i = 0; i < res1.length; i++) {
+	    	for (int j = 0; j < res1[0].length; j++) {
+		        if (res1[i][j] == 'A') { //checks is hero has key
+		            found1 = true;
+		        }
+			}
 	    }
 	    
 	    assertTrue(found1);
@@ -173,12 +177,14 @@ public class TestStillOgreGameLogic {
 		}
 		assertFalse(game.isHeroDead());
 		
-		String res = game.printMap();
+		char[][] res = game.printMap();
 		boolean found = false;
-	    for (int i = 0; i < res.length(); i++) {
-	        if (res.charAt(i) == '8') { //checks is ogre is stunned
-	            found = true;
-	        }
+	    for (int i = 0; i < res.length; i++) {
+	    	for (int j = 0; j < res[0].length; j++) {
+		        if (res[i][j] == '8') { //checks ogre is stunned
+		            found = true;
+		        }
+			}
 	    }
 	    
 	    assertTrue(found);

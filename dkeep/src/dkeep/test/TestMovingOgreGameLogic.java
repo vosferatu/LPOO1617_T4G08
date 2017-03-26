@@ -96,15 +96,16 @@ public class TestMovingOgreGameLogic {
 			}
 		}
 		
-		String res = game.printMap() + "";
+		char[][] res = game.printMap();
 		boolean found = false;
-	    for (int i = 0; i < res.length(); i++) {
-	        if (res.charAt(i) == '$') { //checks is ogre is stunned
-	            found = true;
-	        }
+	    for (int i = 0; i < res.length; i++) {
+	    	for (int j = 0; j < res[0].length; j++) {
+		        if (res[i][j] == '$') { //checks ogre at key
+		            found = true;
+		        }
+			}
 	    }
 	    
 	    assertTrue(found);
-		
 	}	
 }

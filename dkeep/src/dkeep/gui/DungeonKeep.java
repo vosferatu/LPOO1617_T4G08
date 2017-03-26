@@ -188,7 +188,7 @@ public class DungeonKeep {
 	}
 	
 	public void updateGame(Direction move){
-		game.updateGame(move); //check why doens't print last frame
+		game.updateGame(move);
 		if(game != null){
 			textArea.setText(game.toString());
 			this.updateLabel(gameStatus);
