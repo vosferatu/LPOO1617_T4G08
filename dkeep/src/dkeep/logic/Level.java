@@ -82,14 +82,6 @@ public abstract class Level implements GameLogic {
 		return doors;
 	}
 
-	/**
-	 * sets the exit doors
-	 * @param doors new doors
-	 */
-	public void setDoors(ArrayList<Door> doors) {
-		this.doors = doors;
-	}
-	
 	@Override
 	public CellPosition getHeroPosition() {
 		return hero.getPosition();

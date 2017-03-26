@@ -44,14 +44,6 @@ public class Door {
 	public CellPosition getPosition() {
 		return position;
 	}
-
-	/**
-	 * sets the current door position
-	 * @param position new position
-	 */
-	public void setPosition(CellPosition position) {
-		this.position = position;
-	}
 	
 	/**
 	 * sets the current door position using coordinates
@@ -73,36 +65,11 @@ public class Door {
 	}
 
 	/**
-	 * sets the current id
-	 * @param id new id
-	 */
-	public void setId(char id) {
-		this.id = id;
-	}
-
-	/**
 	 * checks if a door is open
 	 * @return true if door is open, false otherwise
 	 */
 	public boolean isOpen() {
 		return isOpen;
 	}
-
-	/**
-	 * sets the door open or shut
-	 * @param isOpen new state
-	 */
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
-	}
-
-	@Override
-	public String toString() {
-		if (isOpen())
-			return "S";
-		else return "" + id;
-	}
-
-	
 	
 }

@@ -130,19 +130,6 @@ public class Hero extends Character {
 	}
 
 	/**
-	 * represents the hero in a string
-	 */
-	@Override
-	public String toString() {
-		if(hasKey() && isArmed())
-			return "K";
-		
-		if(!isArmed())
-			return "" + id;
-		else return "A";
-	}
-
-	/**
 	 * checks if a hero is trying to open the door with a key
 	 * @param move direction of the movement
 	 * @param door to be open

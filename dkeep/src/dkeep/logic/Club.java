@@ -55,12 +55,5 @@ public class Club {
 	public char getId(){
 		return id;
 	}
-	/**
-	 * @return id in string
-	 */
-	@Override
-	public String toString() {
-		return "" + id;
-	}
 
 }

@@ -51,8 +51,8 @@ public class GameMap {
 		  			{'X','X','X','X','X','X','X','X','X'}}; 
 		}		
 		
-		this.setHeight(map.length);
-		this.setWidth(map[0].length);
+		this.height = map.length;
+		this.width =map[0].length;
 	}
 	
 
@@ -62,24 +62,6 @@ public class GameMap {
 	 */
 	public GameMap(char[][] map) {
 		this.setMap(map);
-	}
-
-
-	/**
-	 * converts the map to a string
-	 */
-	@Override
-	public String toString() {
-		String mapa = "\n";
-
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length; j++){
-				mapa += map[i][j] + " ";
-			}
-			mapa += "\n";
-		}
-
-		return mapa;
 	}
 	
 	/**
@@ -133,29 +115,12 @@ public class GameMap {
 	}
 
 	/**
-	 * sets the map's width
-	 * @param width new width
-	 */
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	/**
 	 * gets the map's height
 	 * @return height
 	 */
 	public int getHeight() {
 		return height;
 	}
-
-	/**
-	 * sets the map's height
-	 * @param height new height
-	 */
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
 
 	/**
 	 * gets the current map

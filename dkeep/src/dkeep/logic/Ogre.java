@@ -7,10 +7,6 @@ package dkeep.logic;
 public class Ogre extends Character {
 
 	/**
-	 * if ogre is at key position
-	 */
-	private boolean atKey = false;
-	/**
 	 * represents the number of moves the ogre is stun
 	 */
 	private int stun = 0;
@@ -90,22 +86,6 @@ public class Ogre extends Character {
 	}
 
 	/**
-	 * checks if ogre is at the key's position
-	 * @return true if ogre is at the key's position, false otherwise
-	 */
-	public boolean isAtKey() {
-		return atKey;
-	}
-
-	/**
-	 * sets if an ogre is at the key position
-	 * @param key the game's key
-	 */
-	public void setAtKey(Lever key) {
-		atKey = this.position.equals(key.getPosition());
-	}
-
-	/**
 	 * gets the number of remaining move stuns of the ogre
 	 * @return stuns
 	 */
@@ -119,20 +99,6 @@ public class Ogre extends Character {
 	 */
 	public void setStun(int stun) {
 		this.stun = stun;
-	}
-
-	/**
-	 * represents the ogre in a string
-	 */
-	@Override
-	public String toString() {
-		String res = "";
-		if(getStun() > 0){
-			res+= "8";
-		}
-		else res += id;
-		
-		return res;
 	}
 
 	/**

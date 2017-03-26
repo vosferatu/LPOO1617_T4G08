@@ -69,22 +69,6 @@ public class Guard extends Character{
 	}
 
 	/**
-	 * gets the move counter
-	 * @return move counter
-	 */
-	public int getMoveNum() {
-		return moveNum;
-	}
-
-	/**
-	 * sets the move counter
-	 * @param moveNum new move counter
-	 */
-	public void setMoveNum(int moveNum) {
-		this.moveNum = moveNum;
-	}
-
-	/**
 	 * updates the guard's position, influenced by personality
 	 */
 	public void nextMove(){
@@ -209,19 +193,6 @@ public class Guard extends Character{
 	 */
 	public void setPersonality(Personality personality) {
 		this.personality = personality;
-	}
-
-	/**
-	 * represents the guard
-	 */
-	@Override
-	public String toString() {
-		String res = "" + id;
-		if(isAsleep()){
-			return res.toLowerCase();
-		}
-
-		return res;
 	}
 
 	@Override

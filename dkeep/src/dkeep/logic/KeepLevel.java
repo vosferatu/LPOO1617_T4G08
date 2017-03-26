@@ -143,14 +143,6 @@ public class KeepLevel extends Level {
 	}
 
 	/**
-	 * sets the ogres
-	 * @param ogres new ogres
-	 */
-	public void setOgres(ArrayList<Ogre> ogres) {
-		this.ogres = ogres;
-	}
-
-	/**
 	 * @see dkeep.logic.GameLogic#printMap()
 	 */
 	@Override
