@@ -6,6 +6,7 @@ import dkeep.gui.DungeonClient;
 import dkeep.logic.Direction;
 import dkeep.logic.Personality;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class ConsoleRunner {
 	
 	private static Game game = null;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		mainMenu();
 

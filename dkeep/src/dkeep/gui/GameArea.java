@@ -37,8 +37,11 @@ public class GameArea extends JPanel implements KeyListener {
 	private BufferedImage guardSleeping;
 	private BufferedImage wall;
 	private BufferedImage floor;
-
-	public GameArea(){
+	private static int counter = 0;
+	
+	public GameArea() throws IOException{
+		addKeyListener(this);
+		
 		try {
             // Set System L&F
         UIManager.setLookAndFeel(
@@ -47,10 +50,12 @@ public class GameArea extends JPanel implements KeyListener {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		loadImages();
 	}
 	
 	void loadImages() throws IOException{
-		floor = ImageIO.read(new File("res/floor.png"));
+		floor = ImageIO.read(new File("res\\floor.png"));
 		wall = ImageIO.read(new File("res/wall.png"));
 		exit = ImageIO.read(new File("res/door_open.png"));
 		hero = ImageIO.read(new File("res/hero_unarmed.png"));
@@ -65,7 +70,6 @@ public class GameArea extends JPanel implements KeyListener {
 		door = ImageIO.read(new File("res/door_closed.png"));
 		//background = ImageIO.read(new File("res/background.png"));
 		
-		addKeyListener(this);
 	}
 	
 	@Override
@@ -100,6 +104,9 @@ public class GameArea extends JPanel implements KeyListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		System.out.println("AQUI " + counter);
+		counter++;
+		
 		//int titleX = (this.getWidth()-701) / 2;
 	    //int titleY = (this.getHeight()-636) / 2;
 	    
@@ -107,15 +114,9 @@ public class GameArea extends JPanel implements KeyListener {
 			//z.drawImage(title, titleX, titleY,701,636,null);
 			return;
 		}
-		if(game.getState() == State.DEFEAT){
-			//z.drawImage(over, titleX, titleY,701,636,null);
-		}
-		if(game.getState() == State.WON){
-			//z.drawImage(win, titleX, titleY,701,636,null);
-		}
 		
 		char[][] map = game.getCurrentLevel().printMap();
-		
+	
 		if(!game.isGameOver()){
 			int ratioH = getHeight() / map.length;
 			int ratioW = (getWidth() - 0) / map.length;
@@ -187,6 +188,7 @@ public class GameArea extends JPanel implements KeyListener {
 		this.game = new Game(settings.getPersonality());
 		this.game.setOgreCount(settings.getOgreNum());
 		requestFocus();
+		repaint();
 	}
 
 	@Override

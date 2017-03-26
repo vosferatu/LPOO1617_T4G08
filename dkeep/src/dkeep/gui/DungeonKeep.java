@@ -4,12 +4,12 @@ import javax.swing.JFrame;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.UIManager;
@@ -30,8 +30,10 @@ public class DungeonKeep extends JFrame {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws URISyntaxException 
 	 */
-	public DungeonKeep() {
+	public DungeonKeep() throws IOException {
 		setTitle("DUNGEON KEEP");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("/res/hero_armed.png")); 
 		setBounds(100, 100, 707, 710);
@@ -43,7 +45,7 @@ public class DungeonKeep extends JFrame {
 		
 		gamePanel = new GameArea();
 		gamePanel.setFocusTraversalKeysEnabled(false);
-		gamePanel.setBounds(0, 45, 620, 636);
+		gamePanel.setBounds(0, 0, 707, 624);
 		getContentPane().add(gamePanel);
 		gamePanel.setFocusable(true);
 		
