@@ -1,7 +1,6 @@
 package dkeep.gui;
 
 import javax.swing.JFrame;
-import dkeep.logic.Personality;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -11,6 +10,8 @@ import java.awt.Toolkit;
 
 
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.UIManager;
 
 
@@ -19,11 +20,11 @@ public class DungeonKeep extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private GameArea gamePanel;
+	private GameSettings settings;
+	private GameOptions optionsPanel;
 	private JButton btnNewGame;
 	private JButton btnLevelEditor;
 	private JButton btnExitGame;
-	private int ogreCount = 1;
-	private Personality personality = Personality.SIMPLE;
 	private JButton btnOptions;
 
 	/**
@@ -31,6 +32,13 @@ public class DungeonKeep extends JFrame {
 	 */
 	public DungeonKeep() {
 		initialize();
+		requestFocus();
+		
+		settings = new GameSettings();
+		optionsPanel = new GameOptions();
+		
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(screen.width/2 - this.getSize().width/2, screen.height/2 - this.getSize().height/2);
 	}
 
 	/**
@@ -54,7 +62,8 @@ public class DungeonKeep extends JFrame {
 		btnNewGame.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameArea.newGame(options.get);
+				settings = optionsPanel.getSettings();
+				gamePanel.newGame(settings);
 			}
 		});
 		btnNewGame.setBounds(0, 624, 193, 30);
@@ -69,8 +78,18 @@ public class DungeonKeep extends JFrame {
 		btnLevelEditor.setBounds(191, 624, 187, 30);
 		getContentPane().add(btnLevelEditor);
 		
+		btnOptions = new JButton("Options");
+		btnOptions.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnOptions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				optionsPanel.setVisible(true);
+			}
+		});
+		btnOptions.setBounds(377, 624, 193, 30);
+		getContentPane().add(btnOptions);
+		
 		btnExitGame = new JButton("Exit");
-		btnExitGame.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnExitGame.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnExitGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -78,14 +97,6 @@ public class DungeonKeep extends JFrame {
 		});
 		btnExitGame.setBounds(569, 624, 116, 30);
 		getContentPane().add(btnExitGame);
-		
-		btnOptions = new JButton("Options");
-		btnOptions.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnOptions.setBounds(377, 624, 193, 30);
-		getContentPane().add(btnOptions);
 	}
 
 	public void run() {
@@ -104,5 +115,13 @@ public class DungeonKeep extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public GameSettings getSettings() {
+		return settings;
+	}
+
+	public void setSettings(GameSettings settings) {
+		this.settings = settings;
 	}
 }
