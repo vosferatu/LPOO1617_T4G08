@@ -23,7 +23,7 @@ public class GameArea extends JPanel implements KeyListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Game game = null;
-	//private BufferedImage background;
+	private BufferedImage background;
 	private BufferedImage hero;
 	private BufferedImage heroArmed;
 	private BufferedImage heroKey;
@@ -37,7 +37,8 @@ public class GameArea extends JPanel implements KeyListener {
 	private BufferedImage guardSleeping;
 	private BufferedImage wall;
 	private BufferedImage floor;
-	private static int counter = 0;
+	private BufferedImage over;
+	private BufferedImage win;
 	
 	public GameArea() throws IOException{
 		addKeyListener(this);
@@ -55,20 +56,22 @@ public class GameArea extends JPanel implements KeyListener {
 	}
 	
 	void loadImages() throws IOException{
-		floor = ImageIO.read(new File("res\\floor.png"));
-		wall = ImageIO.read(new File("res/wall.png"));
-		exit = ImageIO.read(new File("res/door_open.png"));
-		hero = ImageIO.read(new File("res/hero_unarmed.png"));
-		lever = ImageIO.read(new File("res/lever.png"));
-		key = ImageIO.read(new File("res/key.png"));
-		guardSleeping = ImageIO.read(new File("res/guard_sleeping.png"));
-		guard = ImageIO.read(new File("res/guard.png"));
-		heroArmed = ImageIO.read(new File("res/hero_armed.png"));
-		heroKey = ImageIO.read(new File("res/hero_key.png"));
-		ogre = ImageIO.read(new File("res/ogre.png"));
-		club = ImageIO.read(new File("res/club.png"));
-		door = ImageIO.read(new File("res/door_closed.png"));
-		//background = ImageIO.read(new File("res/background.png"));
+		floor = ImageIO.read(new File("./res/floor.png"));
+		wall = ImageIO.read(new File("./res/wall.png"));
+		exit = ImageIO.read(new File("./res/door_open.png"));
+		hero = ImageIO.read(new File("./res/hero_unarmed.png"));
+		lever = ImageIO.read(new File("./res/lever.png"));
+		key = ImageIO.read(new File("./res/key.png"));
+		guardSleeping = ImageIO.read(new File("./res/guard_sleeping.png"));
+		guard = ImageIO.read(new File("./res/guard.png"));
+		heroArmed = ImageIO.read(new File("./res/hero_armed.png"));
+		heroKey = ImageIO.read(new File("./res/hero_key.png"));
+		ogre = ImageIO.read(new File("./res/ogre.png"));
+		club = ImageIO.read(new File("./res/club.png"));
+		door = ImageIO.read(new File("./res/door_closed.png"));
+		background = ImageIO.read(new File("res/start.png"));
+		over = ImageIO.read(new File("res/over.png"));
+		win = ImageIO.read(new File("res/win.png"));
 		
 	}
 	
@@ -104,77 +107,82 @@ public class GameArea extends JPanel implements KeyListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		System.out.println("AQUI " + counter);
-		counter++;
-		
-		//int titleX = (this.getWidth()-701) / 2;
-	    //int titleY = (this.getHeight()-636) / 2;
-	    
 	    if(game == null){
-			//z.drawImage(title, titleX, titleY,701,636,null);
+			g.drawImage(background, 0, 0,getWidth(),getHeight(),null);
 			return;
 		}
+	    
+	    if(game.getState() == State.DEFEAT){
+			g.drawImage(over, 0, 0,getWidth(),getHeight(),null);
+			return;
+	    }
 		
+	    if(game.getState() == State.WON){
+			g.drawImage(win, 0, 0,getWidth(),getHeight(),null);
+			return;
+	    }
+	    
 		char[][] map = game.getCurrentLevel().printMap();
 	
 		if(!game.isGameOver()){
-			int ratioH = getHeight() / map.length;
-			int ratioW = (getWidth() - 0) / map.length;
+			int Hnorm = getHeight() / map.length;
+			int Wnorm = (getWidth() - 0) / map.length;
 				
 			for (int i = 0; i < map.length; i++) {
 				for (int j = 0; j < map.length; j++){
 					switch (map[i][j]) {
 					case ' ': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case 'S':
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(exit, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(exit, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case 'X': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(wall, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(wall, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case 'H': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(hero, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(hero, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case 'A': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(heroArmed, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(heroArmed, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 					break;
 					case 'k': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
 						if(game.getState() == State.LEVEL1)
-							g.drawImage(lever, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						else g.drawImage(key, j*ratioW, i*ratioH, ratioW, ratioH, null);
+							g.drawImage(lever, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						else g.drawImage(key, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
 						break;
 					case 'O': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(ogre, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(ogre, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case 'G': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(guard, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(guard, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case 'g': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(guardSleeping, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(guardSleeping, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case 'K': 
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(heroKey, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(heroKey, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case 'I':
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(door, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(door, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 						break;
 					case '*':
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(club, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(club, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
+						break;
 					case '$':
-						g.drawImage(floor, j*ratioW, i*ratioH, ratioW, ratioH, null);
-						g.drawImage(key, j*ratioW, i*ratioH, ratioW, ratioH, null); 
+						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+						g.drawImage(key, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
 					default: 
 						break;
 					}
@@ -185,8 +193,14 @@ public class GameArea extends JPanel implements KeyListener {
 	}
 
 	public void newGame(GameSettings settings) {
-		this.game = new Game(settings.getPersonality());
-		this.game.setOgreCount(settings.getOgreNum());
+		if(settings.getMap() == null){
+			this.game = new Game(settings.getPersonality());
+			this.game.setOgreCount(settings.getOgreNum());
+		}
+		else {
+			this.game = new Game(settings.getMap());
+		}
+		
 		requestFocus();
 		repaint();
 	}

@@ -35,7 +35,7 @@ public class DungeonKeep extends JFrame {
 	 */
 	public DungeonKeep() throws IOException {
 		setTitle("DUNGEON KEEP");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("/res/hero_armed.png")); 
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./res/hero_armed.png")); 
 		setBounds(100, 100, 707, 710);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
