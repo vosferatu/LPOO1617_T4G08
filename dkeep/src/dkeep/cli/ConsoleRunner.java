@@ -2,6 +2,7 @@ package dkeep.cli;
 
 import dkeep.logic.Game;
 import dkeep.logic.State;
+import dkeep.gui.DungeonClient;
 import dkeep.logic.Direction;
 import dkeep.logic.Personality;
 
@@ -17,7 +18,7 @@ public class ConsoleRunner {
 		mainMenu();
 
 		Scanner scanner = new Scanner(System.in);
-		int input = userInput(scanner, "\t1. Play\n\t2. Exit\nOption?", 1, 2);
+		int input = userInput(scanner, "\t1. Play on Console\n\t2. Play with Graphics\n\t3. Exit\nOption?", 1, 3);
 		
 
 		switch (input) {
@@ -25,6 +26,10 @@ public class ConsoleRunner {
 			startDungeon(scanner);
 			break;
 		case 2:
+			DungeonClient gui = new DungeonClient();
+			gui.start();
+			break;
+		case 3:
 			System.out.println("\tLeaving Dungeon Keeper. Goodbye...");
 			break;
 		default:

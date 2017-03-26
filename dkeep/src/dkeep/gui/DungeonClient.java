@@ -7,4 +7,9 @@ public class DungeonClient {
 		dkeep.run();
 	}
 	
+	public void start(){//to run on console
+		DungeonKeep dkeep = new DungeonKeep();
+		dkeep.run();
+	}
+	
 }
