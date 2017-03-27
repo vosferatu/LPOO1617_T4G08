@@ -29,7 +29,7 @@ public class EditorPanel extends JPanel implements MouseListener {
 	private int ogreNum = 0;
 	
 	private char[][] map;
-	private char placing;
+	private char character;
 	
 	public EditorPanel() throws IOException {
 		this.addMouseListener(this);
@@ -53,35 +53,35 @@ public class EditorPanel extends JPanel implements MouseListener {
 		if(map == null)
 			return;
 
-		int Hnorm = getHeight() / map.length;
-		int Wnorm = (getWidth() - 0) / map.length;
+		int heightStretch = getHeight() / map.length;
+		int widthStretch = (getWidth() - 0) / map.length;
 			
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map.length; j++){
 				switch (map[i][j]) {
 				case ' ': 
-					g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
 					break;
 				case 'X': 
-					g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-					g.drawImage(wall, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(wall, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
 					break;
 				case 'H': 
-					g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-					g.drawImage(hero, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(hero, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
 					break;
 
 				case 'k': 
-					g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-					g.drawImage(key, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(key, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
 					break;
 				case 'O': 
-					g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-					g.drawImage(ogre, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(ogre, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
 					break;
 				case 'I':
-					g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-					g.drawImage(exit, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(exit, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
 					break;
 				default: 
 					break;
@@ -91,6 +91,7 @@ public class EditorPanel extends JPanel implements MouseListener {
 	}
 	
 	public void setMap(int size){
+		character = 'S';
 		map = new char[size][size];
 		for(int i = 0; i < map.length; i++){
 			for(int j = 0; j < map.length; j++){ //square
@@ -156,30 +157,30 @@ public class EditorPanel extends JPanel implements MouseListener {
 		}
 		
 		if(arg0.getButton() == MouseEvent.BUTTON1){ //LEFT MOUSE BUTTON
-			if( placing == 'I' && (x == 0 || y == 0 ||x == map.length -1 || y == map.length -1) //door on edges
+			if( character == 'I' && (x == 0 || y == 0 ||x == map.length -1 || y == map.length -1) //door on edges
 					&& !exitDone
 					&& 
 				!((x == 0 && y == 0) || (x == map.length -1 && y == map.length -1) || (x == map.length -1 && y == 0) || (x == 0 && y == map.length -1))){ 
 				
-				map[y][x]= placing;
+				map[y][x]= character;
 				exitDone = true;
 			}
-			if(placing == 'k' && map[y][x]== ' ' && !keyDone){
-				map[y][x]= placing;
+			if(character == 'k' && map[y][x]== ' ' && !keyDone){
+				map[y][x]= character;
 				keyDone = true;
 			}
-			if(placing == 'H' && map[y][x]== ' ' && !heroDone){
-				map[y][x] = placing;
+			if(character == 'H' && map[y][x]== ' ' && !heroDone){
+				map[y][x] = character;
 				heroDone = true;
 			}
-			if(placing == '0' && map[y][x]== ' ' && (ogreNum < 5)){
-				map[y][x] = placing;
+			if(character == '0' && map[y][x]== ' ' && (ogreNum < 5)){
+				map[y][x] = character;
 			}
-			if(map[y][x] == ' ' && placing != 'S' && placing != 'H' && placing != 'k'){
-				map[y][x] = placing;
+			if(map[y][x] == ' ' && character != 'I' && character != 'H' && character != 'k'){
+				map[y][x] = character;
 			}
-			if(placing == 'X' && map[y][x]== ' '){ //check adjacent walls
-				map[y][x]= placing;
+			if(character == 'X' && map[y][x]== ' '){ //check adjacent walls
+				map[y][x]= character;
 			}
 		}
 		
@@ -192,11 +193,11 @@ public class EditorPanel extends JPanel implements MouseListener {
 	}
 
 	public char getPlacing() {
-		return placing;
+		return character;
 	}
 
-	public void setPlacing(char placing) {
-		this.placing = placing;
+	public void setPlacing(char character) {
+		this.character = character;
 	}
 
 	public char[][] getMap() {

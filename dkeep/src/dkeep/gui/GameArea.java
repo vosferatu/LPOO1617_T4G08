@@ -111,11 +111,6 @@ public class GameArea extends JPanel implements KeyListener {
 			g.drawImage(background, 0, 0,getWidth(),getHeight(),null);
 			return;
 		}
-	    
-	    if(game.getState() == State.DEFEAT){
-			g.drawImage(over, 0, 0,getWidth(),getHeight(),null);
-			return;
-	    }
 		
 	    if(game.getState() == State.WON){
 			g.drawImage(win, 0, 0,getWidth(),getHeight(),null);
@@ -123,74 +118,79 @@ public class GameArea extends JPanel implements KeyListener {
 	    }
 	    
 		char[][] map = game.getCurrentLevel().printMap();
-	
-		if(!game.isGameOver()){
-			int Hnorm = getHeight() / map.length;
-			int Wnorm = (getWidth() - 0) / map.length;
-				
-			for (int i = 0; i < map.length; i++) {
-				for (int j = 0; j < map.length; j++){
-					switch (map[i][j]) {
-					case ' ': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case 'S':
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(exit, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case 'X': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(wall, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case 'H': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(hero, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case 'A': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(heroArmed, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
+
+		int heightStretch = getHeight() / map.length;
+		int widthStretch = (getWidth() - 0) / map.length;
+
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map.length; j++){
+				switch (map[i][j]) {
+				case ' ': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
 					break;
-					case 'k': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						if(game.getState() == State.LEVEL1)
-							g.drawImage(lever, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						else g.drawImage(key, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						break;
-					case 'O': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(ogre, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case 'G': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(guard, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case 'g': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(guardSleeping, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case 'K': 
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(heroKey, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case 'I':
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(door, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case '*':
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(club, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-						break;
-					case '$':
-						g.drawImage(floor, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null);
-						g.drawImage(key, j*Wnorm, i*Hnorm, Wnorm, Hnorm, null); 
-					default: 
-						break;
-					}
+				case 'S':
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(exit, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case 'X': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(wall, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case 'H': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(hero, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case 'A': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(heroArmed, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case 'k': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					if(game.getState() == State.LEVEL1)
+						g.drawImage(lever, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					if(game.getState() == State.LEVEL2)
+						g.drawImage(key, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					break;
+				case 'O': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(ogre, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case 'G': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(guard, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case 'g': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(guardSleeping, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case 'K': 
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(heroKey, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case 'I':
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(door, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case '*':
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(club, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+					break;
+				case '$':
+					g.drawImage(floor, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null);
+					g.drawImage(key, j*widthStretch, i*heightStretch, widthStretch, heightStretch, null); 
+				default: 
+					break;
 				}
 			}
-		}	
+		}
 		
-	}
+		
+	    if(game.getState() == State.DEFEAT){
+			g.drawImage(over, (getWidth()/2)-100, (getHeight()/2)-100,200,200,null);
+	    }
+		
+	}	
+
 
 	public void newGame(GameSettings settings) {
 		this.game = new Game(settings);
