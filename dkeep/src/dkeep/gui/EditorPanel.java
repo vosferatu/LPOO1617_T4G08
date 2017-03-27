@@ -1,6 +1,8 @@
 package dkeep.gui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -9,6 +11,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 public class EditorPanel extends JPanel implements MouseListener {
 
@@ -32,8 +35,21 @@ public class EditorPanel extends JPanel implements MouseListener {
 	private char character;
 	
 	public EditorPanel() throws IOException {
+		try {
+            // Set System L&F
+        UIManager.setLookAndFeel(
+            UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(screen.width/2 - this.getSize().width/2, screen.height/2 - this.getSize().height/2);
+		
 		this.addMouseListener(this);
-		setPlacing(' ');
+		setCharacter(' ');
 		
 		loadImages();
 	}
@@ -192,11 +208,11 @@ public class EditorPanel extends JPanel implements MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 	}
 
-	public char getPlacing() {
+	public char getCharacter() {
 		return character;
 	}
 
-	public void setPlacing(char character) {
+	public void setCharacter(char character) {
 		this.character = character;
 	}
 
@@ -215,6 +231,18 @@ public class EditorPanel extends JPanel implements MouseListener {
 	public void setOgreNum(int ogreNum) {
 		this.ogreNum = ogreNum;
 	}
-	
+
+	public boolean isHeroDone() {
+		return heroDone;
+	}
+
+	public boolean isExitDone() {
+		return exitDone;
+	}
+
+	public boolean isKeyDone() {
+		return keyDone;
+	}
+
 	
 }

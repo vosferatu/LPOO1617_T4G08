@@ -49,6 +49,8 @@ public class GameOptions extends JDialog {
 		this.setLocation(screen.width/2 - this.getSize().width/2, screen.height/2 - this.getSize().height/2);
 		
 		settings = new GameSettings();
+		
+		requestFocus();
 		initialize();
 	}
 

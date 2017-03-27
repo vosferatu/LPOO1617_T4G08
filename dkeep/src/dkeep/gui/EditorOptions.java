@@ -22,7 +22,7 @@ public class EditorOptions extends JDialog {
 	private JSlider slider;
 	private JLabel mapSize;
 	private JButton btnOk;
-	private int mapNum;
+	private int mapNum = 8;
 	
 	
 	public EditorOptions() {
