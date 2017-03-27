@@ -193,14 +193,7 @@ public class GameArea extends JPanel implements KeyListener {
 	}
 
 	public void newGame(GameSettings settings) {
-		if(settings.getMap() == null){
-			this.game = new Game(settings.getPersonality());
-			this.game.setOgreCount(settings.getOgreNum());
-		}
-		else {
-			this.game = new Game(settings.getMap());
-		}
-		
+		this.game = new Game(settings);
 		requestFocus();
 		repaint();
 	}
@@ -215,4 +208,7 @@ public class GameArea extends JPanel implements KeyListener {
 		
 	}
 	
+	public Game getGame(){
+		return game;
+	}
 }

@@ -22,6 +22,7 @@ public class DungeonKeep extends JFrame {
 	private GameArea gamePanel;
 	private GameSettings settings;
 	private GameOptions optionsPanel;
+	private LevelEditor editor;
 	
 	private JButton btnNewGame;
 	private JButton btnLevelEditor;
@@ -49,17 +50,26 @@ public class DungeonKeep extends JFrame {
 		getContentPane().add(gamePanel);
 		gamePanel.setFocusable(true);
 		
+		editor = new LevelEditor();
+		
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(screen.width/2 - this.getSize().width/2, screen.height/2 - this.getSize().height/2);
 	
 		initialize();
-		//requestFocus();
+		requestFocus();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		/*
+		if(gamePanel.getGame() != null && gamePanel.getGame().isGameOver()){
+			btnLevelEditor.setEnabled(true); //when to turn true
+			btnOptions.setEnabled(true);
+		}
+		*/
+		
 		//---------------------------------------BUTTONS---------------------------------------------------
 		btnNewGame = new JButton("New Game");
 		btnNewGame.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -70,7 +80,8 @@ public class DungeonKeep extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(settings.getMap() == null)
 					settings = optionsPanel.getSettings();
-				
+				btnLevelEditor.setEnabled(false); //when to turn true
+				btnOptions.setEnabled(false);
 				gamePanel.setEnabled(true);
 				gamePanel.setFocusable(true);
 				gamePanel.requestFocus();
@@ -85,7 +96,11 @@ public class DungeonKeep extends JFrame {
 		getContentPane().add(btnLevelEditor);
 		btnLevelEditor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//to be added
+				editor.setEnabled(true);
+				editor.setVisible(true);
+				setEnabled(false);
+				setVisible(false);
+				setFocusable(true);
 			}
 		});
 		

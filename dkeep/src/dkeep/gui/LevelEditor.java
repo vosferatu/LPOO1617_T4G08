@@ -21,6 +21,12 @@ public class LevelEditor extends JFrame {
 	private int mapSize;
 	private boolean done = false;
 	private EditorOptions options;
+	private JButton hero;
+	private JButton wall;
+	private JButton ogre;
+	private JButton exit;
+	private JButton key;
+	private JButton ok;
 	
 
 	
@@ -40,7 +46,7 @@ public class LevelEditor extends JFrame {
 
 
 	private void initialize() {
-		setBounds(100, 100, 632, 632);
+		setBounds(100, 100, 700, 700);
 
 		
 	}

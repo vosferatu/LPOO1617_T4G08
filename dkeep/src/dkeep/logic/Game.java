@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import dkeep.gui.GameSettings;
+
 /**
  * @author João Mendes
  * 
@@ -21,6 +23,8 @@ public class Game {
 	 * represents the game's current level
 	 */
 	private GameLogic currentLevel;
+	
+	private GameSettings settings;
 
 	/**
 	 * creates a new game
@@ -61,6 +65,11 @@ public class Game {
 		}	
 	}
 
+	public Game(GameSettings settings) {
+		this.settings = settings;
+		this.setCurrentLevel(new DungeonLevel(settings.getPersonality()));
+	}
+
 	/**
 	 * updates the game elements
 	 * @param move direction to move hero
@@ -71,7 +80,11 @@ public class Game {
 		switch (state) {
 		case LEVEL1:
 			if (currentLevel.updateGame(move)) {// passed dungeon level
-				this.setCurrentLevel(new KeepLevel(ogreCount)); //creates ogre map
+				if(settings.getMap() != null){
+					this.setCurrentLevel(new KeepLevel(settings.getMap())); //creates ogre map
+				} else{
+					this.setCurrentLevel(new KeepLevel(settings.getOgreNum())); //creates ogre map
+				}
 				this.state = State.LEVEL2;
 			} else {
 				if (currentLevel.isHeroDead())
@@ -186,6 +199,14 @@ public class Game {
 
 	public CellPosition getHeroPosition() {
 		return currentLevel.getHeroPosition();
+	}
+
+	public GameSettings getSettings() {
+		return settings;
+	}
+
+	public void setSettings(GameSettings settings) {
+		this.settings = settings;
 	}
 
 }

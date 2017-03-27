@@ -146,8 +146,12 @@ public class EditorPanel extends JPanel implements MouseListener {
 				map[y][x] = 'X';
 				exitDone = false;
 			}
+			if(map[y][x] == 'X'){ 
+				map[y][x] = ' ';
+				exitDone = false;
+			}
 			if(x != 0 && y != 0 && (x != map.length - 1) && (y != map.length - 1)){
-				map[y][x]= ' ';
+				map[y][x] = ' ';
 			}
 		}
 		
@@ -173,6 +177,9 @@ public class EditorPanel extends JPanel implements MouseListener {
 			}
 			if(map[y][x] == ' ' && placing != 'S' && placing != 'H' && placing != 'k'){
 				map[y][x] = placing;
+			}
+			if(placing == 'X' && map[y][x]== ' '){ //check adjacent walls
+				map[y][x]= placing;
 			}
 		}
 		
