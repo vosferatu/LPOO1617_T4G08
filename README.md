@@ -49,9 +49,6 @@ All roofs and distance between roofs are randomly generated so after you pass a 
 | Mininum Lenght/Distance | 0.5m   | 2m   |
 | Growth                  | 1m/s   |      |
 
-## Screens Diagram
-![alt tab](https://i.imgur.com/8neKdNn.png)
-
 ### GUI MOCKUPS
 
 **Main Menu**
@@ -101,7 +98,7 @@ Embeding all control schemes :
 ![alt tab](???)
 
 ## Behaviour State Diagram
-![alt tab](???)
+![alt tab](https://i.imgur.com/uPiYVSN.png)
 
 ## Unit Testing
 
