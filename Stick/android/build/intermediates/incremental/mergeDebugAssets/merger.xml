@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\AndroidDev\Stick\android\assets"><file name="badlogic.jpg" path="C:\AndroidDev\Stick\android\assets\badlogic.jpg"/></source></dataSet><dataSet config="debug"><source path="C:\AndroidDev\Stick\android\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\LPOO\Stick\android\assets"><file name="badlogic.jpg" path="E:\LPOO\Stick\android\assets\badlogic.jpg"/></source><source path="E:\LPOO\Stick\android\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="E:\LPOO\Stick\android\src\debug\assets"/></dataSet></merger>
