@@ -13,8 +13,8 @@ import com.stick.game.StickGame;
 public class Over extends State {
 
     private int score = 0;
-    public Texture back, over;
-    BitmapFont font = new BitmapFont();
+    private Texture back, over;
+    private BitmapFont font = new BitmapFont();
 
     public Over(StateManager manager, int score) {
         super(manager);

@@ -10,13 +10,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class State {
 
-    protected Vector2 pointer;
     protected OrthographicCamera camera;
     protected StateManager manager;
 
     public State(StateManager manager){
         this.manager = manager;
-        this.pointer = new Vector2();
         this.camera = new OrthographicCamera();
     }
 

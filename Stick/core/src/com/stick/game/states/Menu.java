@@ -16,7 +16,7 @@ import com.stick.game.StickGame;
 
 public class Menu extends State {
 
-    public Texture back;
+    private Texture back;
     private Stage stage;
     private ImageButton play, sound;
 

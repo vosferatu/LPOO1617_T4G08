@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.stick.game.StickGame;
 
 /**
- * Created by joaomendes on 6/4/17.
+ * represents a hud
  */
 
 public class Hud {
@@ -20,7 +20,7 @@ public class Hud {
     private Viewport viewport;
 
     private int score;
-    Label scoreLabel;
+    private Label scoreLabel;
 
     public Hud(SpriteBatch sb){
         this.score = 0;
